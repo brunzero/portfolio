@@ -31,7 +31,6 @@ var User = require('./models/User');
 
 // Controllers
 var userController = require('./controllers/user');
-var contactController = require('./controllers/contact');
 
 // React and Server-Side Rendering
 var routes = require('./app/routes');
@@ -43,11 +42,13 @@ var compiler = webpack(config);
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
-/*mongoose.connect(process.env.MONGODB);
+/*
+mongoose.createConnection(process.env.MONGODB);
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
-});*/
+});
+*/
 
 var hbs = exphbs.create({
   defaultLayout: 'main',
@@ -105,16 +106,7 @@ if (app.get('env') === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
-app.post('/contact', contactController.contactPost);
-app.put('/account', userController.ensureAuthenticated, userController.accountPut);
-app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
-app.post('/signup', userController.signupPost);
-app.post('/login', userController.loginPost);
-app.post('/forgot', userController.forgotPost);
-app.post('/reset/:token', userController.resetPost);
-app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
-app.post('/auth/facebook', userController.authFacebook);
-app.get('/auth/facebook/callback', userController.authFacebookCallback);
+// Place endpoints here
 
 // React server rendering
 app.use(function(req, res) {

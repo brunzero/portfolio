@@ -1,7 +1,7 @@
 {
-  "name": "withered-breeze",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "My app description",
+  "description": "just playing around for now",
   "scripts": {
     "build": "webpack --display-error-details",
     "deploy": "npm test && git push heroku master",
@@ -22,6 +22,7 @@
     "babel-preset-react": "^6.5.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.15.1",
+    "bulma": "^0.6.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.1",
     "dotenv": "^2.0.0",
