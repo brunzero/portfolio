@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Hero from './Hero';
 
 if(process.env.BROWSER)
   require('./Home.scss');
@@ -8,7 +9,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-wrapper">
-        <nav className="navbar" role="navigation">
+        <nav className="navbar is-light" role="navigation">
           <div className="navbar-brand">
             <a className="navbar-item" href="https://bulma.io">
               <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"/>
@@ -20,6 +21,7 @@ class Home extends React.Component {
             </div>
           </div>
         </nav>
+        <Hero size="medium" color="primary" title="Testing" subtitle="123"/>
         <div className="columns">
           <div className="column">
             <div className="card">
