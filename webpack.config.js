@@ -56,7 +56,14 @@ var config = {
         loaders: [
           'style-loader',
           'css-loader',
-          'sass-loader'
+          'sass-loader',
+          /*{
+            loader: 'sass-resources-loader',
+            options: {
+              // Sass files here are global resources
+              resources: ['./app/components/Colors.scss'],
+            },
+          },*/
         ],
       }
     ]

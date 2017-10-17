@@ -11,7 +11,7 @@ class Hero extends React.Component{
     return(
       <div className={`hero is-${size} is-${color}`}>
         <div className="hero-body">
-          <div className="container">
+          <div className="container has-text-centered">
             <h1 className="title">
               {title}
             </h1>
