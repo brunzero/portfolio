@@ -9,8 +9,12 @@ class Column extends React.Component{
     let color = this.props.color || "";
     let height = this.props.height || "";
     return (
-      <div className={`column ${color} ${height}`}>
-        {this.props.children}
+      <div className="column">
+        <div className={`${color} ${height}`}>
+          <div className="centered">
+              {this.props.children}
+          </div>
+        </div>
       </div>
     )
   }

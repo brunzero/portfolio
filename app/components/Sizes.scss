@@ -1,15 +1,22 @@
 .smallh{
-  height: 10em;
+  min-height: 10em;
 }
 
 .mediumh{
-  height: 30em;
+  min-height: 30em;
 }
 
 .largeh{
-  height: 70em;
+  min-height: 70em;
 }
 
 .fullh{
-  height: 100em;
+  min-height: 100em;
+}
+
+.centered{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em;
 }
