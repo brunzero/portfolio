@@ -11,7 +11,7 @@ class Pokemon extends React.Component{
       loading: true
     };
   }
-  componentWillMount(){
+  componentDidMount(){
     this.fetchPokemon();
   }
 
@@ -29,11 +29,12 @@ class Pokemon extends React.Component{
       if (response.ok) {
         response.json().then(function (data) {
           self.setState({pokemon: data, loading: false});
-          return response.ok;
-        }).catch(function(){
-          console.log("Request for Pokemon failed.");
+        }).catch(function(error){
+          console.log("JSON problems.");
+          console.log(error);
         })
       }
+      else console.log("Request for Pokemon failed.");
     });
   }
 
