@@ -60,7 +60,7 @@ class Home extends React.Component {
     //console.log(pokemon.sprites.front_default);
     return (
       <div className="home-wrapper">
-        <Header size="medium" color="light" title="Welcome" subtitle="To the crib"/>
+        <Header size="medium" color="light" title="Welcome" subtitle="To the crib" icon={pokeSprite}/>
         <div className="section gray">
           <div className="columns">
             {
@@ -74,7 +74,9 @@ class Home extends React.Component {
                 <span><b>Weight:</b>  {pokeWeight} <b>kg</b></span>
               </Column>
               :
-              <Column color="red" height="smallh"/>
+              <Column color="red" height="smallh">
+                <div className="loading"/>
+              </Column>
             }
             <Column color="blue" height="smallh">
               This is some text

@@ -20,3 +20,13 @@
   align-items: center;
   padding: 1.5em;
 }
+
+.loading{
+    animation: spinAround 400ms infinite linear;
+    border: 2px solid #dbdbdb;
+    border-radius: 290486px !important;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    height: 100px;
+    width: 100px;
+}
