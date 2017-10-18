@@ -1,0 +1,14 @@
+@import './Colors.scss';
+@import './Sizes.scss';
+
+html,body{
+  height: 100%;
+  background-color: whitesmoke;
+}
+.home-wrapper{
+  .column{
+    div{
+      border-radius: 1em;
+    }
+  }
+}
