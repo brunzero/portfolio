@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import Hero from './Hero';
 import Column from './Column';
 import Header from './Header';
-//var Pokedex = require('pokedex-promise-v2');
+import fetch from 'isomorphic-fetch'
+
 
 if(process.env.BROWSER)
   require('./Home.scss');
