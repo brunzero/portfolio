@@ -29,10 +29,10 @@ class Pokemon extends React.Component{
       if (response.ok) {
         response.json().then(function (data) {
           self.setState({pokemon: data, loading: false});
+          return response.ok;
+        }).catch(function(){
+          console.log("Request for Pokemon failed.");
         })
-      }
-      else{
-        console.log("Pokemon could not be loaded. Refresh the page.");
       }
     });
   }
