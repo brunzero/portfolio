@@ -11,9 +11,7 @@ class Column extends React.Component{
     return (
       <div className="column">
         <div className={`${color} ${height}`}>
-          <div className="centered">
-              {this.props.children}
-          </div>
+          {this.props.children}
         </div>
       </div>
     )

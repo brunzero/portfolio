@@ -16,7 +16,7 @@ class Header extends React.Component {
           <nav className="navbar is-light" role="navigation">
             <div className="navbar-brand">
               <a className="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"/>
+                <b>Bruno's Workshop</b>
               </a>
               <div className="navbar-burger">
                 <span></span>
