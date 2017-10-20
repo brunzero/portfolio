@@ -14,7 +14,7 @@ if(process.env.BROWSER)
   var RecordRTC = require('recordrtc');
 }
 
-var recordRTC;
+//var recordRTC;
 
 class Home extends React.Component {
   constructor(props) {
@@ -23,7 +23,8 @@ class Home extends React.Component {
       loading: true,
       record: false,
       blob: "",
-      metadata: ""
+      metadata: "",
+      recordRTC: ""
     }
   }
   componentDidMount(){
@@ -42,8 +43,9 @@ class Home extends React.Component {
             bufferSize: 512,
             numberOfAudioChannels: 1,
         }
-        recordRTC = RecordRTC(stream, options);
+        var recordRTC = RecordRTC(stream, options);
         recordRTC.startRecording(); 
+        self.setState({recordRTC: recordRTC});
       })
       .catch(function(error){
         console.log(error);
@@ -53,6 +55,7 @@ class Home extends React.Component {
 
   finishRecording(){
     const self = this;
+    var recordRTC = this.state.recordRTC;
     recordRTC.stopRecording(function(audioURL) {
       self.setState({record:false})
       var recordedBlob = recordRTC.getBlob();
