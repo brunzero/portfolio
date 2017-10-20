@@ -42,13 +42,7 @@ class Home extends React.Component {
     this.setState({record:true});
     if(process.env.BROWSER)
     {
-      var options = {
-          mimeType: 'audio/webm', 
-          bitsPerSecond: 120000,
-          bufferSize: 512,
-          numberOfAudioChannels: 1,
-      }
-      var recordRTC = RecordRTC(stream, options);
+      var recordRTC = RecordRTC(stream, {recorderType: RecordRTC.StereoAudioRecorder});
       recordRTC.startRecording(); 
       self.setState({recordRTC: recordRTC});
     }
