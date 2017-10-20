@@ -21,9 +21,8 @@ class Pokemon extends React.Component{
       pokeID = Math.ceil(Math.random()*251);
     }
     else pokeID = name;
-    fetch("https://pokeapi.co/api/v2/pokemon/"+pokeID, {
+    fetch('/pokemon', {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json'},
     }).then((response) => {
       if (response.ok) {
         response.json().then(function (data) {

@@ -26,6 +26,7 @@ class Home extends React.Component {
           <MusicRecognition/>
           <div className="columns">
             <Column color="red">
+              <Pokemon/>
             </Column>
           </div>
         </div>

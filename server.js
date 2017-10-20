@@ -18,7 +18,6 @@ var request = require('request');
 var sass = require('node-sass-middleware');
 var webpack = require('webpack');
 var config = require('./webpack.config');
-var ACRCloud = require('acr-cloud');
 
 // Load environment variables from .env file
 dotenv.load();
@@ -51,19 +50,6 @@ mongoose.connection.on('error', function() {
 });
 */
 
-var acr = new ACRCloud({
-    // required 
-    access_key: "73d6f63fb7f29a0162415ab06fc6be1f",
-    access_secret: "HYyaskkUCHM6z2sVdc9d99hJHX5yWzBxNs3DcPpP",
-    // optional 
-    requrl: 'identify-us-west-2.acrcloud.com',
-    http_method: 'POST',
-    http_uri: '/v1/identify',
-    audio_format: 'webm',
-    data_type: 'Fingerprint',
-    signature_version: '1',
-    timestamp: Date.now()
-});
 
 // Enable cross domain
 app.use( function( req, res, next ) {
@@ -133,68 +119,13 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
-
-app.post('/tomp3', function(req, res){
-  var lamejs = require('lamejs');
-  var channels = 1; //1 for mono or 2 for stereo 
-  var sampleRate = 44100; //44.1khz (normal mp3 samplerate) 
-  var kbps = 128; //encode 128kbps mp3 
-  var mp3encoder = new lamejs.Mp3Encoder(channels, sampleRate, kbps);
-  var mp3Data = [];
-  
-  var samples = new Int16Array(req.body.buffer) //one second of silence (get your data from the source you have) 
-  var sampleBlockSize = 1152; //can be anything but make it a multiple of 576 to make encoders life easier 
-  
-  var mp3Data = [];
-  for (var i = 0; i < samples.length; i += sampleBlockSize) {
-    var sampleChunk = samples.subarray(i, i + sampleBlockSize);
-    var mp3buf = mp3encoder.encodeBuffer(sampleChunk);
-    if (mp3buf.length > 0) {
-        mp3Data.push(mp3buf);
-    }
-  }
-  mp3buf = mp3encoder.flush();   //finish writing mp3 
-  
-  if (mp3buf.length > 0) {
-      mp3Data.push(new Int8Array(mp3buf));
-  }
-
-  res.send({
-    data:mp3Data
-  })
-})
+// Controllers
+var music = require('./controllers/music')
+var pokemon = require('./controllers/pokemon');
 
 // Place endpoints here
-app.post('/identify', function(req, res){
-  var buffer = req.body.buffer.toString();
-  buffer = buffer.replace(/^data:audio\/webm;base64,/, "")
-  acr.identify(buffer)
-  .then( function( data ) {
-    console.log("I HAVEN'T EVEN IDENTIFIED");
-    var response = JSON.parse( data.body );
-    if( data.statusCode == 200 && response.status ) {
-      var success = ( response.status.msg == 'Success' );
-      return res.send({
-        success: success,
-        msg: response.status.msg,
-        data: data
-      });
-    } else {
-      return res.send({
-        success: false,
-        msg: "Error reaching API",
-        data: data
-      });
-    }
-  })
-  .catch( function( err ) {
-    return res.status(200).send({
-      success: false,
-      msg: "Error identifying audio",
-      data: err
-    });
-  })
-})
+app.post('/identify', music.identify);
+app.get('/pokemon', pokemon.pokemon);
 
 // React server rendering
 app.use(function(req, res) {
