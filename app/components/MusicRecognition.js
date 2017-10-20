@@ -21,7 +21,7 @@ class MusicRecognition extends React.Component{
   }
 
   componentDidMount(){
-    navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){
+    navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
       stream = streamCaptured;
     }).catch();
   }
@@ -46,8 +46,9 @@ class MusicRecognition extends React.Component{
   finishRecording(){
     const self = this;
     var recordRTC = this.state.recordRTC;
+    stream.stop();
+    self.setState({record:false});
     recordRTC.stopRecording(function(audioURL) {
-      self.setState({record:false})
       var recordedBlob = recordRTC.getBlob();
       var reader = new FileReader();
       reader.readAsDataURL(recordedBlob);
