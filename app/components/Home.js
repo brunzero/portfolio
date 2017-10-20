@@ -53,8 +53,8 @@ class Home extends React.Component {
 
   finishRecording(){
     const self = this;
-    this.setState({record:false})
     recordRTC.stopRecording(function(audioURL) {
+      self.setState({record:false})
       var recordedBlob = recordRTC.getBlob();
       var reader = new FileReader();
       reader.readAsDataURL(recordedBlob);

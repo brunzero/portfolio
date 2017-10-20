@@ -9,6 +9,7 @@ if(process.env.NODE_ENV === 'development')
   var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
+      'whatwg-fetch',
       'webpack-hot-middleware/client',
       './app/main'
     ],
