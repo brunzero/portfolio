@@ -37,8 +37,9 @@ class MusicRecognition extends React.Component{
           bufferSize: 512,
           numberOfAudioChannels: 1,
       }
-      var recordRTC = RecordRTC(stream, options);
-      recordRTC.startRecording(); 
+      //RecordRTC.MediaStreamRecorder
+      var recordRTC = new RecordRTC.MediaStreamRecorder(stream, options);
+      recordRTC.record();
       self.setState({recordRTC: recordRTC});
     }
   }
@@ -46,9 +47,12 @@ class MusicRecognition extends React.Component{
   finishRecording(){
     const self = this;
     var recordRTC = this.state.recordRTC;
-    stream.stop();
+    recordRTC.stop(function(blob){
+      console.log(blob);
+      self.setState({blob:blob});
+    })
     self.setState({record:false});
-    recordRTC.stopRecording(function(audioURL) {
+    /*recordRTC.stopRecording(function(audioURL) {
       var recordedBlob = recordRTC.getBlob();
       var reader = new FileReader();
       reader.readAsDataURL(recordedBlob);
@@ -72,7 +76,7 @@ class MusicRecognition extends React.Component{
           else console.log("Request for song failed.");
         });
       }
-    });
+    });*/
   }
 
   render(){
@@ -83,6 +87,7 @@ class MusicRecognition extends React.Component{
         <div className="columns">
           <Column color="gray centered">
             Recording: {`${record}`} <br/>
+            {this.state.blob.size};
             <button className="button" onClick={()=>this.beginRecording()}> Record </button>
             <button className="button" onClick={()=>this.finishRecording()}> Stop </button>
           </Column>
