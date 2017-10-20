@@ -20,6 +20,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       record: false,
       blob: "",
       metadata: ""
@@ -68,7 +69,7 @@ class Home extends React.Component {
             response.json().then(function (data) {
               var body = JSON.parse(data.data.body);
               //console.log(body);
-              self.setState({metadata: body.metadata.music[0]})
+              self.setState({metadata: body.metadata.music[0], loading: false})
             }).catch(function(error){
               console.log("JSON problems.");
               console.log(error);
@@ -102,9 +103,10 @@ class Home extends React.Component {
               <button className="button" onClick={()=>this.beginRecording()}> Record </button>
               <button className="button" onClick={()=>this.finishRecording()}> Stop </button>
             </Column>
+            {!this.state.loading &&
             <Column color="gray">
               {metadata.artists[0].name} - {metadata.title}
-            </Column>
+            </Column>}
           </div>
           <div className="columns">
             <Column color="red">
