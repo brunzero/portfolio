@@ -6,54 +6,92 @@ import Header from './Header';
 import Pokemon from './Pokemon';
 
 
+
+
 if(process.env.BROWSER)
 {
   require('./Home.scss');
-  var acrcloud = require('acrcloud');
+  var RecordRTC = require('recordrtc');
 }
+
+var recordRTC;
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       record: false,
-      blob: ""
+      blob: "",
+      metadata: ""
     }
-    this.changeRecordingState = this.changeRecordingState.bind(this);
-    this.onStop = this.onStop.bind(this);
+  }
+  componentDidMount(){
   }
 
-renderClientSide(){
-  if(process.env.BROWSER){
-    var {ReactMic} = require('react-mic');
-    return <ReactMic
-              record = {record}
-              onStop = {this.onStop}
-            />
+  beginRecording(stream){
+    const self = this;
+    this.setState({record:true});
+    if(process.env.BROWSER)
+    {
+      navigator.mediaDevices.getUserMedia({audio:true, video:false})
+      .then(function(stream){
+        var options = {
+            mimeType: 'audio/webm', 
+            bitsPerSecond: 120000,
+            bufferSize: 512,
+            numberOfAudioChannels: 1,
+        }
+        recordRTC = RecordRTC(stream, options);
+        recordRTC.startRecording(); 
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+    }
   }
-  else return;
-}
 
- changeRecordingState(status){
-   if(status!=this.state.record)
-   {
-    this.setState({
-      record:status
+  finishRecording(){
+    const self = this;
+    this.setState({record:false})
+    recordRTC.stopRecording(function(audioURL) {
+      var recordedBlob = recordRTC.getBlob();
+      var reader = new FileReader();
+      reader.readAsDataURL(recordedBlob);
+      reader.onloadend = function(){
+        var buffer = reader.result;
+        fetch('/identify', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({buffer: buffer})
+        }).then((response) => {
+          if (response.ok) {
+            response.json().then(function (data) {
+              var body = JSON.parse(data.data.body);
+              //console.log(body);
+              self.setState({metadata: body.metadata.music[0]})
+            }).catch(function(error){
+              console.log("JSON problems.");
+              console.log(error);
+            })
+          }
+          else console.log("Request for song failed.");
+        });
+      }
     });
-   }
- }
+  }
 
- onStop(blob){
-   //console.log(blob.blobURL);
-   this.setState({
-     blob: blob.blobURL
-   })
- }
+ 
+  sendEncodedBlob(){
+
+      //console.log(buffer);
+     /* */
+  }
 
   render() {
    //console.log(this.state.record);
    let record = this.state.record;
-    //console.log(pokemon.sprites.front_default);
+   let metadata = this.state.metadata;
+   console.log(metadata);
     return (
       <div className="home-wrapper">
         <Header size="medium" color="light" title="Welcome" subtitle="To the crib"/>
@@ -61,22 +99,15 @@ renderClientSide(){
           <div className="columns">
             <Column color="gray">
               Recording: {`${record}`} <br/>
-              {this.renderClientSide()}
-              <button className="button" onClick={()=>this.changeRecordingState(true)}> Record </button>
-              <button className="button" onClick={()=>this.changeRecordingState(false)}> Stop </button>
+              <button className="button" onClick={()=>this.beginRecording()}> Record </button>
+              <button className="button" onClick={()=>this.finishRecording()}> Stop </button>
+            </Column>
+            <Column color="gray">
+              {metadata.artists[0].name} - {metadata.title}
             </Column>
           </div>
           <div className="columns">
             <Column color="red">
-              <audio ref="audio" className="bet" controls>
-                <source ref="audiosource" src={this.state.blob} type="audio/webm"/>
-              </audio>
-            </Column>
-            <Column color="red">
-              <Pokemon/>
-            </Column>
-            <Column color="red">
-              <Pokemon/>
             </Column>
           </div>
         </div>

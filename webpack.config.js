@@ -17,15 +17,26 @@ if(process.env.NODE_ENV === 'development')
       filename: 'bundle.js',
       publicPath: '/js'
     },
+    node: {
+      fs: 'empty'
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.NoErrorsPlugin(),
+      new webpack.IgnorePlugin(/\/iconv-loader$/),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'process.env.BROWSER': JSON.stringify(true)
       })
     ],
     module: {
+      preLoaders : [
+        { 
+          test: /\.json$/, 
+          loader: 'json'
+        }
+      ],
       loaders: [
         {
           test: /\.js$/,
@@ -97,6 +108,10 @@ else if(process.env.NODE_ENV === 'production'){
     module: {
       loaders: [
         {
+          test: /\.json$/,
+          loader: 'json-loader'
+        },
+        {
           test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
@@ -134,7 +149,7 @@ else if(process.env.NODE_ENV === 'production'){
               },
             },*/
           ],
-        }
+        },
       ]
     }
   };
