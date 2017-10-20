@@ -22,7 +22,6 @@ class MusicRecognition extends React.Component{
 
   componentDidMount(){
     navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){
-      console.log("capped the stream");
       stream = streamCaptured;
     }).catch();
   }

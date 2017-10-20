@@ -125,7 +125,7 @@ var pokemon = require('./controllers/pokemon');
 
 // Place endpoints here
 app.post('/identify', music.identify);
-app.get('/pokemon', pokemon.pokemon);
+app.get('/pokemon/:id', pokemon.pokemon);
 
 // React server rendering
 app.use(function(req, res) {

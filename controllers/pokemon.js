@@ -1,7 +1,7 @@
 var fetch = require('node-fetch');
 
 exports.pokemon = function(req, res){
-  fetch("https://pokeapi.co/api/v2/pokemon/"+2, {
+  fetch("https://pokeapi.co/api/v2/pokemon/"+req.params.id, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json'},
   }).then((response) => {
