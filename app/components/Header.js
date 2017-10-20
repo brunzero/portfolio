@@ -19,11 +19,9 @@ class Header extends React.Component {
                 <b>Bruno's Workshop</b>
               </a>
               <div className="navbar-burger">
-                <div className="dropdown">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             </div>
           </nav>
