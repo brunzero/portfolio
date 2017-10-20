@@ -15,6 +15,7 @@ if(process.env.BROWSER)
 }
 
 //var recordRTC;
+var stream;
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,30 +27,30 @@ class Home extends React.Component {
       metadata: "",
       recordRTC: ""
     }
+    this.beginRecording = this.beginRecording.bind(this);
+    this.finishRecording = this.finishRecording.bind(this);
   }
   componentDidMount(){
+    navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){
+      console.log("capped the stream");
+      stream = streamCaptured;
+    }).catch();
   }
 
-  beginRecording(stream){
+  beginRecording(){
     const self = this;
     this.setState({record:true});
     if(process.env.BROWSER)
     {
-      navigator.mediaDevices.getUserMedia({audio:true, video:false})
-      .then(function(stream){
-        var options = {
-            mimeType: 'audio/webm', 
-            bitsPerSecond: 120000,
-            bufferSize: 512,
-            numberOfAudioChannels: 1,
-        }
-        var recordRTC = RecordRTC(stream, options);
-        recordRTC.startRecording(); 
-        self.setState({recordRTC: recordRTC});
-      })
-      .catch(function(error){
-        console.log(error);
-      });
+      var options = {
+          mimeType: 'audio/webm', 
+          bitsPerSecond: 120000,
+          bufferSize: 512,
+          numberOfAudioChannels: 1,
+      }
+      var recordRTC = RecordRTC(stream, options);
+      recordRTC.startRecording(); 
+      self.setState({recordRTC: recordRTC});
     }
   }
 
