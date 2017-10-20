@@ -98,7 +98,7 @@ app.use(function(req, res, next) {
   }
 });
 
-if (app.get('env') === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath

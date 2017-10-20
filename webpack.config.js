@@ -1,8 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
+var dotenv = require('dotenv');
+dotenv.load();
 
-if(!process.env.NODE_ENV === 'production')
+if(process.env.NODE_ENV === 'development')
 {
+  console.log('WE USING DEV WEBPACK SHIT');
   var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
@@ -17,7 +20,6 @@ if(!process.env.NODE_ENV === 'production')
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'process.env.BROWSER': JSON.stringify(true)
@@ -72,7 +74,8 @@ if(!process.env.NODE_ENV === 'production')
     }
   };
 }
-else{
+else if(process.env.NODE_ENV === 'production'){
+  console.log('WE NOT USING DEV WEBPACK SHIT');
   var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
