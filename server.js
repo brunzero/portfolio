@@ -55,6 +55,7 @@ if (process.env.NODE_ENV == 'production') {
     if (req.headers['x-forwarded-proto'] !== 'https'){
       res.redirect("https://"+req.headers.host + req.originalUrl);
     }
+    return next();
   });
 };
 
