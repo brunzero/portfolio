@@ -46,7 +46,6 @@ class MusicRecognition extends React.Component{
   finishRecording(){
     const self = this;
     var recordRTC = this.state.recordRTC;
-    stream.stop();
     self.setState({record:false});
     recordRTC.stopRecording(function(audioURL) {
       var recordedBlob = recordRTC.getBlob();
