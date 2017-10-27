@@ -1,11 +1,15 @@
 var path = require('path');
 var webpack = require('webpack');
+var dotenv = require('dotenv');
+dotenv.load();
 
-if(!process.env.NODE_ENV === 'production')
+if(process.env.NODE_ENV === 'development')
 {
+  console.log('WE USING DEV WEBPACK SHIT');
   var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
+      'whatwg-fetch',
       'webpack-hot-middleware/client',
       './app/main'
     ],
@@ -14,16 +18,26 @@ if(!process.env.NODE_ENV === 'production')
       filename: 'bundle.js',
       publicPath: '/js'
     },
+    node: {
+      fs: 'empty'
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.NoErrorsPlugin(),
+      new webpack.IgnorePlugin(/\/iconv-loader$/),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'process.env.BROWSER': JSON.stringify(true)
       })
     ],
     module: {
+      preLoaders : [
+        { 
+          test: /\.json$/, 
+          loader: 'json'
+        }
+      ],
       loaders: [
         {
           test: /\.js$/,
@@ -72,7 +86,8 @@ if(!process.env.NODE_ENV === 'production')
     }
   };
 }
-else{
+else if(process.env.NODE_ENV === 'production'){
+  console.log('WE NOT USING DEV WEBPACK SHIT');
   var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
@@ -93,6 +108,10 @@ else{
     ],
     module: {
       loaders: [
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
+        },
         {
           test: /\.js$/,
           exclude: /node_modules/,
@@ -131,7 +150,7 @@ else{
               },
             },*/
           ],
-        }
+        },
       ]
     }
   };

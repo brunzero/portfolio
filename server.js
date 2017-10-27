@@ -50,6 +50,19 @@ mongoose.connection.on('error', function() {
 });
 */
 
+
+// Enable cross domain
+app.use( function( req, res, next ) {
+	res.header( 'Access-Control-Allow-Origin', '*' );
+	res.header( 'Access-Control-Allow-Headers', 'X-Requested-With' );
+	next();
+});
+
+// Body parser with bigger body size limit
+var sizeLimit = process.env.SIZE_LIMIT || '5mb';
+app.use( bodyParser.json( { limit: sizeLimit } ) );
+app.use( bodyParser.urlencoded( { limit: sizeLimit, extended: true } ) );
+
 var hbs = exphbs.create({
   defaultLayout: 'main',
   helpers: {
@@ -98,7 +111,7 @@ app.use(function(req, res, next) {
   }
 });
 
-if (app.get('env') === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
@@ -106,7 +119,13 @@ if (app.get('env') === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
+// Controllers
+var music = require('./controllers/music')
+var pokemon = require('./controllers/pokemon');
+
 // Place endpoints here
+app.post('/identify', music.identify);
+app.get('/pokemon/:id', pokemon.pokemon);
 
 // React server rendering
 app.use(function(req, res) {
@@ -135,6 +154,7 @@ app.use(function(req, res) {
     }
   });
 });
+
 
 // Production error handler
 if (app.get('env') === 'production') {

@@ -4,37 +4,27 @@ import Hero from './Hero';
 import Column from './Column';
 import Header from './Header';
 import Pokemon from './Pokemon';
+import MusicRecognition from './MusicRecognition';
+
+
 
 
 if(process.env.BROWSER)
+{
   require('./Home.scss');
+}
+
+
 
 class Home extends React.Component {
-
+  
   render() {
-    //console.log(pokemon.sprites.front_default);
     return (
       <div className="home-wrapper">
         <Header size="medium" color="light" title="Welcome" subtitle="To the crib"/>
         <div className="section gray">
+          <MusicRecognition/>
           <div className="columns">
-            <Column color="red">
-              <Pokemon/>
-            </Column>
-            <Column color="red">
-              <Pokemon/>
-            </Column>
-            <Column color="red">
-              <Pokemon/>
-            </Column>
-          </div>
-          <div className="columns">
-            <Column color="red">
-              <Pokemon/>
-            </Column>
-            <Column color="red">
-              <Pokemon/>
-            </Column>
             <Column color="red">
               <Pokemon/>
             </Column>

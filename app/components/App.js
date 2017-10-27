@@ -1,5 +1,10 @@
 import React from 'react';
 
+if(!process.env.BROWSER)
+{
+  global.window = {};
+}
+
 class App extends React.Component {
   render() {
     return (
