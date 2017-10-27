@@ -51,7 +51,7 @@ mongoose.connection.on('error', function() {
 */
 
 if (process.env.NODE_ENV == 'production') {
-  app.get('*', function(req, res){
+  app.get('*', function(req, res, next){
     if (req.headers['x-forwarded-proto'] !== 'https'){
       res.redirect("https://"+req.headers.host + req.originalUrl);
     }
