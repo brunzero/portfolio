@@ -51,7 +51,7 @@ mongoose.connection.on('error', function() {
 */
 
 if (process.env.NODE_ENV == 'production') {
-  app.get('*', function(){
+  app.get('*', function(req, res){
     res.redirect("https://"+req.headers.host + req.originalUrl);
   });
 };
