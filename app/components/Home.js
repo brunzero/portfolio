@@ -28,6 +28,12 @@ class Home extends React.Component {
             <Column color="red">
               <Pokemon/>
             </Column>
+            <Column color="blue">
+              <Pokemon/>
+            </Column>
+            <Column color="green">
+              <Pokemon/>
+            </Column>
           </div>
         </div>
       </div>
