@@ -50,6 +50,11 @@ mongoose.connection.on('error', function() {
 });
 */
 
+if (process.env.NODE_ENV == 'production') {
+  app.get('*', function(){
+    res.redirect("https://"+req.headers.host + req.originalUrl);
+  });
+};
 
 // Enable cross domain
 app.use( function( req, res, next ) {
