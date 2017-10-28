@@ -29,10 +29,13 @@ require('babel-core/register');
 require('babel-polyfill');
 
 // Models
-var User = require('./models/User');
+var User = require('./models/User');  
 
 // Controllers
-var userController = require('./controllers/user');
+var music = require('./controllers/music')
+var pokemon = require('./controllers/pokemon');
+var user = require('./controllers/user');
+var weather = require('./controllers/weather');
 
 // React and Server-Side Rendering
 var routes = require('./app/routes');
@@ -132,13 +135,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
-// Controllers
-var music = require('./controllers/music')
-var pokemon = require('./controllers/pokemon');
 
 // Place endpoints here
 app.post('/identify', music.identify);
 app.get('/pokemon/:id', pokemon.pokemon);
+app.get('/ip', weather.ip);
+app.get('/geolocate', weather.geolocate);
 
 // React server rendering
 app.use(function(req, res) {

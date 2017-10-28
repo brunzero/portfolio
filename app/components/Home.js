@@ -18,7 +18,21 @@ if(process.env.BROWSER)
 
 
 class Home extends React.Component {
-  
+  componentDidMount(){
+    fetch('/geolocate', {
+      method: 'GET',
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+        }).catch(function(error){
+          console.log("JSON problems.");
+          console.log(error);
+        })
+      }
+      else console.log("Request for Pokemon failed.");
+    });
+  }
   render() {
     return (
       <div className="home-wrapper">
@@ -42,6 +56,9 @@ class Home extends React.Component {
         <Hero textcolor="white" color="palette1" title="Are you listening to music?" centered="centered">
           <MusicRecognition textcolor="white"/>
         </Hero>
+        </div>
+        <div className="columns">
+          
         </div>
       </div>
     );
