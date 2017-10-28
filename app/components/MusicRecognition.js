@@ -29,7 +29,7 @@ class MusicRecognition extends React.Component{
   componentDidMount(){
     const self = this;
     navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
-      stream = streamCaptured;
+      //stream = streamCaptured;
       self.setState({recordingSupported: true});
     }).catch();
   }
@@ -45,15 +45,21 @@ class MusicRecognition extends React.Component{
           bufferSize: 512,
           numberOfAudioChannels: 1,
       }
-      var recordRTC = RecordRTC(stream, options);
-      recordRTC.startRecording(); 
-      self.setState({recordRTC: recordRTC});
+      if(!stream){
+        navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
+          stream = streamCaptured;
+          var recordRTC = RecordRTC(stream, options);
+          recordRTC.startRecording(); 
+          self.setState({recordRTC: recordRTC});
+        }).catch();
+      }
     }
   }
 
   finishRecording(){
     const self = this;
     var recordRTC = this.state.recordRTC;
+    stream.stop();
     self.setState({record:false});
     recordRTC.stopRecording(function(audioURL) {
       var recordedBlob = recordRTC.getBlob();
