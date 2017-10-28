@@ -26,14 +26,14 @@ class Home extends React.Component {
         <div className="pokemon-home-wrapper">
           <Hero title = "Have some Pokèmon" subtitle="Refresh the page if you don't like your team" centered="centered">
               <div className="columns">
+                <Column color="palette2">
+                  <Pokemon textcolor="black"/>
+                </Column>
                 <Column color="palette3">
-                  <Pokemon textcolor="white"/>
+                  <Pokemon textcolor="black"/>
                 </Column>
                 <Column color="palette4">
-                  <Pokemon textcolor="white"/>
-                </Column>
-                <Column color="palette5">
-                  <Pokemon textcolor="white"/>
+                  <Pokemon textcolor="black"/>
                 </Column>
               </div>
           </Hero>

@@ -7,17 +7,17 @@
     .microphone{
       height: 96px;
       width: 96px;
-      opacity: .6;
+      opacity: .5;
       transition: opacity .2s;
       .line{
-        fill: $black;
+        fill: $white;
       }
     }
   }
   .record-button:hover{
     display:inline-block;
     .microphone:hover{
-      opacity: 1;
+      opacity: .2;
     }
   }
   .recording{
@@ -33,7 +33,7 @@
   }
   @keyframes toOpaque{
     from{
-      opacity: .7;
+      opacity: .5;
     }
     to{
       opacity: 1;
