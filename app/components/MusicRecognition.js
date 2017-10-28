@@ -90,9 +90,12 @@ class MusicRecognition extends React.Component{
     });
   }
   toggleRecording(){
-    if(this.state.record)
-      this.finishRecording();
-    else this.beginRecording();
+    if(this.state.recordingSupported)
+    {
+      if(this.state.record)
+        this.finishRecording();
+      else this.beginRecording();
+    }
   }
   renderSongResult(){
     if(this.state.loading)
