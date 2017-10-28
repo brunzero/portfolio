@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import Hero from './Hero';
 import Column from './Column';
 
+if(process.env.BROWSER){
+  require('./Header.scss');
+}
 
 class Header extends React.Component {
   render(){
