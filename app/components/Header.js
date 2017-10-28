@@ -15,15 +15,13 @@ class Header extends React.Component {
       <div className="header-wrapper">
         <div className={`hero is-${size} ${color}`}>
           <div className="hero-head">
-            <nav className="navbar is-light" role="navigation">
+            <nav className="navbar" role="navigation">
               <div className="navbar-brand">
-                <a className="navbar-item" href="https://bulma.io">
+                <div className="navbar-item">
+                  <img src="/resources/icons/moogle.gif" width="32" height="32" alt="Bulma"/>
+                </div>  
+                <div className="navbar-item">
                   <b><span className={`text-${textcolor}`}>Bruno's Workshop</span></b>
-                </a>
-                <div className="navbar-burger">
-                  <span></span>
-                  <span></span>
-                  <span></span>
                 </div>
               </div>
             </nav>
