@@ -106,7 +106,7 @@ class MusicRecognition extends React.Component{
       <div className={`music-recognition-wrapper text-${textcolor}`}>
         <div className="columns">
           <Column>
-            Press record while listening to a song and I'll tell you what song it is. <br/> Recording on your device is {supported}. 
+            Record part of the song and I'll tell you what it is. <br/> Recording on your device is {supported}. 
           </Column>
         </div>
         <div className="columns">

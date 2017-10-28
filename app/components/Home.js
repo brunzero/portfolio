@@ -24,7 +24,7 @@ class Home extends React.Component {
       <div className="home-wrapper">
         <Header size="medium" color="palette1" title="Welcome" textcolor="white"/>
         <div className="pokemon-home-wrapper">
-          <Hero title = "Have some pokemon" subtitle="Refresh the page if you don't like your team" centered="centered">
+          <Hero title = "Have some Pokèmon" subtitle="Refresh the page if you don't like your team" centered="centered">
               <div className="columns">
                 <Column color="palette3">
                   <Pokemon textcolor="white"/>
@@ -39,7 +39,7 @@ class Home extends React.Component {
           </Hero>
         </div>
         <div className="music-recognition-home-wrapper">
-        <Hero textcolor="white" color="palette1" title="Do you like music?" subtitle="What are you listening to?" centered="centered">
+        <Hero textcolor="white" color="palette1" title="Are you listening to music?" centered="centered">
           <MusicRecognition textcolor="white"/>
         </Hero>
         </div>
