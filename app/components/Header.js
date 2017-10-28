@@ -12,29 +12,31 @@ class Header extends React.Component {
     let color = this.props.color || "";
     let textcolor = this.props.textcolor || "";
     return(
-      <div className={`hero is-${size} ${color}`}>
-        <div className="hero-head">
-          <nav className="navbar is-light" role="navigation">
-            <div className="navbar-brand">
-              <a className="navbar-item" href="https://bulma.io">
-                <b><span className={`text-${textcolor}`}>Bruno's Workshop</span></b>
-              </a>
-              <div className="navbar-burger">
-                <span></span>
-                <span></span>
-                <span></span>
+      <div className="header-wrapper">
+        <div className={`hero is-${size} ${color}`}>
+          <div className="hero-head">
+            <nav className="navbar is-light" role="navigation">
+              <div className="navbar-brand">
+                <a className="navbar-item" href="https://bulma.io">
+                  <b><span className={`text-${textcolor}`}>Bruno's Workshop</span></b>
+                </a>
+                <div className="navbar-burger">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
+            </nav>
+          </div>
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <h1 className={`title text-${textcolor}`}>
+                {title}
+              </h1>
+              <h2 className={`subtitle text-${textcolor}`}>
+                {subtitle}
+              </h2>
             </div>
-          </nav>
-        </div>
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <h1 className={`title text-${textcolor}`}>
-              {title}
-            </h1>
-            <h2 className={`subtitle text-${textcolor}`}>
-              {subtitle}
-            </h2>
           </div>
         </div>
       </div>
