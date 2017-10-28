@@ -69,7 +69,6 @@ class MusicRecognition extends React.Component{
           if (response.ok) {
             response.json().then(function (data) {
               var body = JSON.parse(data.data.body);
-              console.log(data);
               if(data.success)
                 self.setState({metadata: body.metadata.music[0], loading: false})
               else
