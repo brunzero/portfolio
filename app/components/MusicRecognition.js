@@ -12,6 +12,7 @@ class MusicRecognition extends React.Component{
     constructor(props) {
     super(props);
     this.state = {
+      recordingSupported: false,
       loading: true,
       record: false,
       blob: "",
@@ -23,8 +24,10 @@ class MusicRecognition extends React.Component{
   }
 
   componentDidMount(){
+    const self = this;
     navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
       stream = streamCaptured;
+      self.setState({recordingSupported: true});
     }).catch();
   }
 
@@ -76,14 +79,23 @@ class MusicRecognition extends React.Component{
     });
   }
 
+  renderSongResult(){
+    if(this.state.loading)
+      return(<span>Your song goes here</span>)
+    else if(this.state.metadata.match(""))
+      return(<span>Try recording it again</span>)
+    else return <span>{this.state.metadata.artists[0].name} - {this.state.metadata.title}</span>
+  }
+
   render(){
     let record = this.state.record;
     let metadata = this.state.metadata;
+    let supported = this.state.recordingSupported ? "supported":"not supported";
     return(
       <div className="music-recognition-wrapper">
         <div className="columns">
           <Column color="gray centered">
-            Press record while listening to a song and I'll tell you what song it is.
+            Press record while listening to a song and I'll tell you what song it is. Recording on your device is {supported}. 
           </Column>
           <Column color="gray">
             Recording: {`${record}`} <br/>
