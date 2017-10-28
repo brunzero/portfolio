@@ -141,6 +141,7 @@ app.post('/identify', music.identify);
 app.get('/pokemon/:id', pokemon.pokemon);
 app.get('/ip', weather.ip);
 app.get('/geolocate', weather.geolocate);
+app.get('/weather', weather.weather);
 
 // React server rendering
 app.use(function(req, res) {

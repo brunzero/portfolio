@@ -6,6 +6,8 @@ import Header from './Header';
 import Pokemon from './Pokemon';
 import MusicRecognition from './MusicRecognition';
 import SVG from './SVG';
+import requestParser from './RequestParser';
+var rp = require('request-promise');
 
 
 
@@ -19,19 +21,10 @@ if(process.env.BROWSER)
 
 class Home extends React.Component {
   componentDidMount(){
-    fetch('/geolocate', {
-      method: 'GET',
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then(function (data) {
-          console.log(data);
-        }).catch(function(error){
-          console.log("JSON problems.");
-          console.log(error);
-        })
-      }
-      else console.log("Request for Pokemon failed.");
-    });
+    rp(requestParser.uriMinusPath+'/weather', {method:'GET', json:true})
+      .then(response=>{
+        console.log(response);
+      })
   }
   render() {
     return (
@@ -57,8 +50,9 @@ class Home extends React.Component {
           <MusicRecognition textcolor="white"/>
         </Hero>
         </div>
-        <div className="columns">
-          
+        <div className="weather-home-wrapper">
+        <Hero size="medium" title="How's the weather?" subtitle="Coming Soon" centered = "centered">
+        </Hero>
         </div>
       </div>
     );
