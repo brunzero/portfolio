@@ -45,12 +45,6 @@ class MusicRecognition extends React.Component{
           bufferSize: 512,
           numberOfAudioChannels: 1,
       }
-      if(!stream){
-        navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
-          stream = streamCaptured;
-          self.setState({recordingSupported: true});
-        }).catch();
-      }
       var recordRTC = RecordRTC(stream, options);
       recordRTC.startRecording(); 
       self.setState({recordRTC: recordRTC});
@@ -75,7 +69,8 @@ class MusicRecognition extends React.Component{
           if (response.ok) {
             response.json().then(function (data) {
               var body = JSON.parse(data.data.body);
-              if(data.sucess)
+              console.log(data);
+              if(data.success)
                 self.setState({metadata: body.metadata.music[0], loading: false})
               else
                 self.setState({loading: false})
@@ -97,7 +92,7 @@ class MusicRecognition extends React.Component{
   renderSongResult(){
     if(this.state.loading)
       return(<span>Your song goes here</span>)
-    else if(this.state.metadata.match(""))
+    else if(this.state.metadata=="")
       return(<span>I wasn't able to identify your song. <br/> Try recording again.</span>)
     else return <span>{this.state.metadata.artists[0].name} - {this.state.metadata.title}</span>
   }
