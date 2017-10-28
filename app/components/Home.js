@@ -21,21 +21,25 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-wrapper">
-        <Header size="medium" color="light" title="Welcome" subtitle="To the crib"/>
-        <div className="section gray">
-          <MusicRecognition/>
-          <div className="columns">
-            <Column color="red">
-              <Pokemon/>
-            </Column>
-            <Column color="blue">
-              <Pokemon/>
-            </Column>
-            <Column color="green">
-              <Pokemon/>
-            </Column>
-          </div>
+        <Header color="palette1" title="Welcome" subtitle="To the crib" textcolor="white"/>
+        <div className="pokemon-home-wrapper">
+          <Hero title = "Here" subtitle="Have some pokemon">
+              <div className="columns">
+                <Column color="palette3">
+                  <Pokemon textcolor="white"/>
+                </Column>
+                <Column color="palette4">
+                  <Pokemon textcolor="white"/>
+                </Column>
+                <Column color="palette5">
+                  <Pokemon textcolor="white"/>
+                </Column>
+              </div>
+          </Hero>
         </div>
+        <Hero title="Do you like music?" subtitle="What are you listening to?" centered="centered">
+          <MusicRecognition/>
+        </Hero>
       </div>
     );
   }

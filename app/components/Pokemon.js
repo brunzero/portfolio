@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Column from './Column';
 
+if(process.env.BROWSER){
+  require('./Pokemon.scss');
+}
+
 class Pokemon extends React.Component{
   constructor(props) {
     super(props);
@@ -37,6 +41,7 @@ class Pokemon extends React.Component{
   }
 
   render(){
+    let textcolor = this.props.textcolor || "";
     let pokemon = {};
     let pokeSprite = "";
     let pokeName = "";
@@ -51,7 +56,7 @@ class Pokemon extends React.Component{
     }
     return(
       !this.state.loading ?
-      <div className="pokemon-wrapper centered">
+      <div className={`pokemon-wrapper centered text-${textcolor}`}>
         <figure className="image is-96x96">
           <img src={pokeSprite} height="96" width="96"/>
         </figure>

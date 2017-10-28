@@ -10,13 +10,14 @@ class Header extends React.Component {
     let subtitle = this.props.subtitle || "";
     let size = this.props.size || "";
     let color = this.props.color || "";
+    let textcolor = this.props.textcolor || "";
     return(
-      <div className={`hero is-${size} is-${color}`}>
-        <div className="header">
+      <div className={`hero is-${size} ${color}`}>
+        <div className="hero-head">
           <nav className="navbar is-light" role="navigation">
             <div className="navbar-brand">
               <a className="navbar-item" href="https://bulma.io">
-                <b>Bruno's Workshop</b>
+                <b><span className={`text-${textcolor}`}>Bruno's Workshop</span></b>
               </a>
               <div className="navbar-burger">
                 <span></span>
@@ -28,13 +29,12 @@ class Header extends React.Component {
         </div>
         <div className="hero-body">
           <div className="container has-text-centered">
-            <h1 className="title">
+            <h1 className={`title text-${textcolor}`}>
               {title}
             </h1>
-            <h2 className="subtitle">
+            <h2 className={`subtitle text-${textcolor}`}>
               {subtitle}
             </h2>
-            {this.props.children}
           </div>
         </div>
       </div>

@@ -4,7 +4,9 @@ import Column from './Column';
 if(process.env.BROWSER)
 {
   var RecordRTC = require('recordrtc');
+  require('./MusicRecognition.scss');
 }
+
 var stream;
 class MusicRecognition extends React.Component{
     constructor(props) {
@@ -78,18 +80,20 @@ class MusicRecognition extends React.Component{
     let record = this.state.record;
     let metadata = this.state.metadata;
     return(
-      <div>
+      <div className="music-recognition-wrapper">
         <div className="columns">
           <Column color="gray centered">
+            Press record while listening to a song and I'll tell you what song it is.
+          </Column>
+          <Column color="gray">
             Recording: {`${record}`} <br/>
             <button className="button" onClick={()=>this.beginRecording()}> Record </button>
             <button className="button" onClick={()=>this.finishRecording()}> Stop </button>
           </Column>
-          {!this.state.loading &&
           <Column color="gray centered">
-            {metadata.artists[0].name} - {metadata.title}
-          </Column>}
-        </div>
+            {!this.state.loading ? <span>{metadata.artists[0].name} - {metadata.title}</span> : <span>Your song goes here</span>}
+          </Column>
+        </div>            
       </div>
     )
   }
