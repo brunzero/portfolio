@@ -65,7 +65,7 @@ class Pokemon extends React.Component{
         <span><b>Weight:</b>  {pokeWeight} <b>kg</b></span>
       </div>
       :
-      <div className="pokemon-wrapper centered">
+      <div className={`pokemon-wrapper centered text-${textcolor}`}>
         <figure className="image is-96x96">
           <div className="loading"/>
         </figure>

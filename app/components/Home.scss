@@ -6,8 +6,13 @@ html,body{
   background-color: whitesmoke;
 }
 .home-wrapper{
-  .hero{
-    margin-bottom: 3rem;
+  .pokemon-home-wrapper{
+    padding-top: 3rem;
+  }
+  .music-recognition-home-wrapper{
+    .hero-head{
+      padding-top: 3rem;
+    }
   }
   .column{
     div{

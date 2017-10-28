@@ -1,5 +1,6 @@
 import React from 'react'
 import Column from './Column';
+import SVG from './SVG';
 
 if(process.env.BROWSER)
 {
@@ -21,6 +22,8 @@ class MusicRecognition extends React.Component{
     }
     this.beginRecording = this.beginRecording.bind(this);
     this.finishRecording = this.finishRecording.bind(this);
+    this.renderSongResult = this.renderSongResult.bind(this);
+    this.toggleRecording = this.toggleRecording.bind(this);
   }
 
   componentDidMount(){
@@ -41,6 +44,12 @@ class MusicRecognition extends React.Component{
           bitsPerSecond: 120000,
           bufferSize: 512,
           numberOfAudioChannels: 1,
+      }
+      if(!stream){
+        navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
+          stream = streamCaptured;
+          self.setState({recordingSupported: true});
+        }).catch();
       }
       var recordRTC = RecordRTC(stream, options);
       recordRTC.startRecording(); 
@@ -66,8 +75,10 @@ class MusicRecognition extends React.Component{
           if (response.ok) {
             response.json().then(function (data) {
               var body = JSON.parse(data.data.body);
-              //console.log(body);
-              self.setState({metadata: body.metadata.music[0], loading: false})
+              if(data.sucess)
+                self.setState({metadata: body.metadata.music[0], loading: false})
+              else
+                self.setState({loading: false})
             }).catch(function(error){
               console.log("JSON problems.");
               console.log(error);
@@ -78,32 +89,40 @@ class MusicRecognition extends React.Component{
       }
     });
   }
-
+  toggleRecording(){
+    if(this.state.record)
+      this.finishRecording();
+    else this.beginRecording();
+  }
   renderSongResult(){
     if(this.state.loading)
       return(<span>Your song goes here</span>)
     else if(this.state.metadata.match(""))
-      return(<span>Try recording it again</span>)
+      return(<span>I wasn't able to identify your song. <br/> Try recording again.</span>)
     else return <span>{this.state.metadata.artists[0].name} - {this.state.metadata.title}</span>
   }
 
   render(){
+    let textcolor = this.props.textcolor;
     let record = this.state.record;
     let metadata = this.state.metadata;
+    let recording = this.state.record ? "recording" : ""
     let supported = this.state.recordingSupported ? "supported":"not supported";
     return(
-      <div className="music-recognition-wrapper">
+      <div className={`music-recognition-wrapper text-${textcolor}`}>
         <div className="columns">
-          <Column color="gray centered">
-            Press record while listening to a song and I'll tell you what song it is. Recording on your device is {supported}. 
+          <Column>
+            Press record while listening to a song and I'll tell you what song it is. <br/> Recording on your device is {supported}. 
           </Column>
-          <Column color="gray">
-            Recording: {`${record}`} <br/>
-            <button className="button" onClick={()=>this.beginRecording()}> Record </button>
-            <button className="button" onClick={()=>this.finishRecording()}> Stop </button>
+        </div>
+        <div className="columns">
+          <Column>
+            <div className={`record-button ${recording}`} onClick={()=>this.toggleRecording()}><SVG name={"microphone"}/></div>
           </Column>
-          <Column color="gray centered">
-            {!this.state.loading ? <span>{metadata.artists[0].name} - {metadata.title}</span> : <span>Your song goes here</span>}
+        </div>
+        <div className="columns">
+          <Column>
+            {this.renderSongResult()}
           </Column>
         </div>            
       </div>
