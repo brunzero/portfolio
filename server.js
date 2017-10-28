@@ -18,6 +18,8 @@ var request = require('request');
 var sass = require('node-sass-middleware');
 var webpack = require('webpack');
 var config = require('./webpack.config');
+var favicon = require('serve-favicon')
+
 
 // Load environment variables from .env file
 dotenv.load();
@@ -49,6 +51,8 @@ mongoose.connection.on('error', function() {
   process.exit(1);
 });
 */
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
 
 if (process.env.NODE_ENV == 'production') {
   app.get('*', function(req, res, next){
@@ -97,6 +101,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(function(req, res, next) {
   req.isAuthenticated = function() {

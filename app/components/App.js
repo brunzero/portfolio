@@ -1,4 +1,5 @@
 import React from 'react';
+//require('../favicon.ico');
 
 if(!process.env.BROWSER)
 {
