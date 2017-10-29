@@ -20,16 +20,16 @@ if(process.env.BROWSER)
 
 
 class Home extends React.Component {
-  componentDidMount(){
+  componentDidMount(){/*
     rp(requestParser.uriMinusPath+'/weather', {method:'GET', json:true})
       .then(response=>{
         console.log(response);
-      })
+      })*/
   }
   render() {
     return (
       <div className="home-wrapper">
-        <Header size="medium" color="palette1" title="Welcome" textcolor="white"/>
+        <Header size="medium" color="palette1" title="Welcome" textcolor="white" home/>
         <div className="pokemon-home-wrapper">
           <Hero title = "Have some Pokèmon" subtitle="Refresh the page if you don't like your team" centered="centered">
               <div className="columns">

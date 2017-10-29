@@ -8,6 +8,18 @@ if(process.env.BROWSER){
 }
 
 class Header extends React.Component {
+    constructor(props) {
+    super(props);
+    this.renderTopLeft = this.renderTopLeft.bind(this);
+  }
+  renderTopLeft(){
+    if(this.props.home)
+      return "Bruno's Workshop";
+    else if(this.props.reader)
+      return "Manga Reader";
+    else 
+      return "Bruno's Workshop";
+  }
   render(){
     let title = this.props.title || "";
     let subtitle = this.props.subtitle || "";
@@ -24,7 +36,7 @@ class Header extends React.Component {
                   <img src="/resources/icons/moogle.gif" width="32" height="32" alt="Bulma"/>
                 </div>  
                 <div className="navbar-item">
-                  <b><span className={`text-${textcolor}`}>Bruno's Workshop</span></b>
+                  <b><span className={`text-${textcolor}`}>{this.renderTopLeft()}</span></b>
                 </div>
               </div>
             </nav>

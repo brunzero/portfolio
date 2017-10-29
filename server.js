@@ -36,6 +36,7 @@ var music = require('./controllers/music')
 var pokemon = require('./controllers/pokemon');
 var user = require('./controllers/user');
 var weather = require('./controllers/weather');
+var reader = require('./controllers/reader');
 
 // React and Server-Side Rendering
 var routes = require('./app/routes');
@@ -142,6 +143,7 @@ app.get('/pokemon/:id', pokemon.pokemon);
 app.get('/ip', weather.ip);
 app.get('/geolocate', weather.geolocate);
 app.get('/weather', weather.weather);
+app.get('/chapter/:id', reader.chapter);
 
 // React server rendering
 app.use(function(req, res) {
