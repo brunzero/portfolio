@@ -143,7 +143,7 @@ app.get('/pokemon/:id', pokemon.pokemon);
 app.get('/ip', weather.ip);
 app.get('/geolocate', weather.geolocate);
 app.get('/weather', weather.weather);
-app.get('/chapter/:id', reader.chapter);
+app.get('/chapter/:title/:chapter', reader.chapter);
 
 // React server rendering
 app.use(function(req, res) {

@@ -4,8 +4,8 @@ var rp = require('request-promise');
 
 exports.chapter = function(req, res){
   var siteid = 'mangareader.net';
-  var mangaid = 'one-piece';
-  var chapterid = req.params.id;
+  var mangaid = req.params.title;
+  var chapterid = req.params.chapter;
   var options = {
     method: 'GET',
     uri: 'https://doodle-manga-scraper.p.mashape.com/'+siteid+'/manga/'+mangaid+'/'+chapterid,

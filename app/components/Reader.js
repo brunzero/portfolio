@@ -17,36 +17,46 @@ class Reader extends React.Component {
     super(props);
     this.state = {
       loading: false,
+      title: "",
       chapter: [],
       chaptertitle: "",
       chapternum: 1,
       pagenum: 1,
-      
     };
     this.requestChapter = this.requestChapter.bind(this);
   }
   componentDidMount(){
-    this.requestChapter(5);
   }
-  requestChapter(chapternum){
+  requestChapter(title, chapternum){
     const self = this;
+    var title = title.replace(/ /, '-').toLowerCase();
     self.setState({loading: true});
-    fetch(requestParser.uriMinusPath+'/chapter/'+chapternum)
+    fetch(requestParser.uriMinusPath+'/chapter/'+title+'/'+chapternum)
       .then(function(response){
         return response.json()
       })
       .then(function(response){
-        console.log(response);
-        self.setState({
-          chapter: response.pages,
-          chaptertitle: response.name,
-          chapternum: chapternum,
-          loading: false
-        });
+        if(JSON.stringify(response) !== '{}'){
+          title = title.replace(/-/, ' ').toLowerCase();
+          title = title.toLowerCase().replace(/(^| )(\w)/g, s => s.toUpperCase())
+          self.setState({
+            title: title,
+            chapter: response.pages,
+            chaptertitle: response.name,
+            chapternum: parseInt(chapternum),
+            loading: false
+          });
+        }
       })
   }
+  submitForm(e){
+    e.preventDefault();
+    var title = this.refs.title.value;
+    var chapter = this.refs.chapter.value;
+    this.requestChapter(title, chapter);
+  }
   render(){
-    //let book = this.state.book;
+    let title = this.state.title;
     let chapter = this.state.chapter;
     let chaptertitle = this.state.chaptertitle;
     let chapternum = this.state.chapternum;
@@ -54,41 +64,28 @@ class Reader extends React.Component {
     return(
       <div className="reader-wrapper">
         <Header size="small" color="palette1" textcolor="white" reader/>
-        <div className="columns is-mobile">
-          <Column width="2">
-            <div className="left-button" onClick={()=>this.requestChapter(chapternum-1)}>
-              <SVG name="leftarrow"/>
-            </div>
-          </Column>
-          <Column width="6">
-            <div className = "field">
+          <form className = "form field" onSubmit={(e)=>{this.submitForm(e)}}>
+            <input type="submit" style={{display: "none"}}/>
+            <div className = "manga">
               <label className="label">Manga Title</label>
               <div className = "control"> 
-                <input className="input" type="text" placeholder="ex. one-piece (separate spaces with dashes)"/>
+                <input ref="title" className="input" type="text" placeholder="one piece"/>
               </div>
             </div>
-          </Column>
-          <Column width="2">
-            <div className = "field">
+            <div className = "chapter">
               <label className="label">Ch</label>
               <div className = "control"> 
-                <input className="input" type="text" placeholder="1"/>
+                <input ref="chapter" className="input" type="text" placeholder="1"/>
               </div>
             </div>
-          </Column>
-          <Column width="2">
-            <div className="right-button" onClick={()=>this.requestChapter(chapternum+1)}>
-              <SVG name="rightarrow"/>
-            </div>
-          </Column>
-        </div>   
+          </form>
         <div className="chapter-wrapper">
-          <Hero color="palette1" title="One Piece" subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered = "centered">   
+          <Hero color="palette1" title={title} subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered = "centered">    
               {!this.state.loading ? chapter.map(function(page, i){
                 var url = page.url.replace(/^http:\/\//i, 'https://');
-                return (
-                  <img className={`chapter-${chapternum} page-${page.pageId}`} src={url}/>
-                )
+                  return (
+                    <img className={`chapter-${chapternum} page-${page.pageId}`} src={url} key={i}/>
+                  )
                 })
                 :
                 <div>
@@ -97,20 +94,13 @@ class Reader extends React.Component {
                   </figure>
                 </div>
               }
-            <div className="columns reader-footer is-mobile">
-              <Column width="2">
-                <div className="left-button" onClick={()=>this.requestChapter(chapternum-1)}>
-                  <SVG name="leftarrow"/>
-                </div>
-              </Column>
-              <Column width="8"/>
-              <Column width="2">
-                <div className="right-button" onClick={()=>this.requestChapter(chapternum+1)}>
-                  <SVG name="rightarrow"/>
-                </div>
-              </Column>
-            </div>
           </Hero>
+          <div className="left-button" onClick={()=>this.requestChapter(title, (chapternum-1))}>
+            <SVG name="leftarrow"/>
+          </div>
+          <div className="right-button" onClick={()=>this.requestChapter(title, (chapternum+1))}>
+            <SVG name="rightarrow"/>
+          </div> 
         </div>
       </div>
     )
