@@ -6,7 +6,7 @@ import Header from './Header';
 import Pokemon from './Pokemon';
 import SVG from './SVG';
 import requestParser from './RequestParser';
-var rp = require('request-promise');
+
 
 if(process.env.BROWSER){
   require('./Reader.scss');
@@ -23,12 +23,12 @@ class Reader extends React.Component {
       pagenum: 1,
       
     };
-    this.requestChapter = this.requestChapter.bind(this);
+    //this.requestChapter = this.requestChapter.bind(this);
   }
   componentDidMount(){
-    this.requestChapter(5);
+    //this.requestChapter(5);
   }
-  requestChapter(chapternum){
+  /*requestChapter(chapternum){
     const self = this;
     self.setState({loading: true});
     rp(requestParser.uriMinusPath+'/chapter/'+chapternum, {method:'GET', json:true})
@@ -41,7 +41,7 @@ class Reader extends React.Component {
           loading: false
         });
       })
-  }
+  }*/
   render(){
     //let book = this.state.book;
     let chapter = this.state.chapter;
