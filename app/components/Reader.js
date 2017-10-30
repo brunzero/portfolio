@@ -56,11 +56,11 @@ class Reader extends React.Component {
     this.requestChapter(title, chapter);
   }
   render(){
-    let title = this.state.title;
-    let chapter = this.state.chapter;
-    let chaptertitle = this.state.chaptertitle;
-    let chapternum = this.state.chapternum;
-    let pagenum = this.state.pagenum;
+    let title = this.state.title || "";
+    let chapter = this.state.chapter || "";
+    let chaptertitle = this.state.chaptertitle || "";
+    let chapternum = this.state.chapternum || 1;
+    let pagenum = this.state.pagenum || 1;
     return(
       <div className="reader-wrapper">
         <Header size="small" color="palette1" textcolor="white" reader/>
