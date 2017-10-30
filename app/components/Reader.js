@@ -65,7 +65,6 @@ class Reader extends React.Component {
       <div className="reader-wrapper">
         <Header size="small" color="palette1" textcolor="white" reader/>
           <form className = "form field" onSubmit={(e)=>{this.submitForm(e)}}>
-            <input type="submit" style={{display: "none"}}/>
             <div className = "manga">
               <label className="label">Manga Title</label>
               <div className = "control"> 
@@ -78,6 +77,7 @@ class Reader extends React.Component {
                 <input ref="chapter" className="input" type="text" placeholder="1"/>
               </div>
             </div>
+            <input className="button" type="submit"/>
           </form>
         <div className="chapter-wrapper">
           <Hero color="palette1" title={title} subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered = "centered">    

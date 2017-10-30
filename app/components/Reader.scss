@@ -57,16 +57,29 @@
   .form{
     display: flex;
     justify-content: center;
+    align-items: flex-end;
     .manga{
-      width: 50%;
+      width: 40%;
+      margin-left: 5%;
     }
     .chapter{
-      width: 40%;
-      padding-left: 10%;
+      width: 45px;
+      margin-left: 2.5%;
     }
     .label{
-      text-align: center;
+      //text-align: center;
       color: $palette4;
+    }
+    .button{
+      margin-left: 2.5%;
+      margin-right: 5%;
+      border-color: $palette4;
+      color: $palette4;
+      background-color: transparent;
+    }
+    .button:hover{
+      background-color: $palette4;
+      color: white;
     }
   }
   .loading-wrapper{
