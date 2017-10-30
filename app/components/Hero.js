@@ -10,13 +10,18 @@ class Hero extends React.Component{
     let color = this.props.color || "";
     let textcolor = this.props.textcolor || "";
     let centered = this.props.centered || "";
+    let subtextcolor = this.props.subtextcolor || "";
+    let background = {
+      backgroundImage: "url('"+this.props.background+"')" || "",
+      backgroundSize: "cover"
+    };
     return(
-      <div className={`hero is-${size} ${color} has-text-${centered}`}>
+      <div className={`hero is-${size} ${color} has-text-${centered}`} style={background}>
         <div className="hero-head">
           <h1 className={`title text-${textcolor}`}>
             {title}
           </h1>
-          <h2 className={`subtitle text-${textcolor}`}>
+          <h2 className={`subtitle text-${subtextcolor} text-${textcolor}`}>
             {subtitle}
           </h2>
         </div>

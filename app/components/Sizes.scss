@@ -22,11 +22,12 @@
 }
 
 .loading{
-    animation: spinAround 400ms infinite linear;
-    border: 2px solid #dbdbdb;
+    animation: spinAround 700ms infinite ease-in-out;
+    border: 5px solid #dbdbdb;
     border-radius: 290486px !important;
     border-right-color: transparent;
     border-top-color: transparent;
+    border-bottom-color: transparent;
     margin: auto;
     height: 50%;
     width: 50%;

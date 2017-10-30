@@ -1,0 +1,89 @@
+@import './Colors.scss';
+
+.reader-wrapper{
+  min-height: 100vh;
+  background-color: $palette1;
+  .columns{
+    margin: unset;
+    min-height: 36px;
+    .column{
+      margin: unset;
+      padding-left: .5rem;
+      padding-right: .5rem;
+      .column-child{
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+    }
+  }
+  .right-button{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 36px;
+    width: 36px;
+    margin: auto;
+    .rightarrow{
+      cursor: pointer;
+      height: 100%;
+      width: 100%;
+      .line{
+        fill: $palette4;
+      }
+    }
+  }
+  .left-button{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 36px;
+    width: 36px;
+    margin: auto;
+    //margin-left: 1rem;
+    //margin-right: 1rem;
+    //padding-left: 1rem;
+    //padding-right: 1rem;
+    .leftarrow{
+      cursor: pointer;
+      height: 100%;
+      width: 100%;
+      .line{
+        fill: $palette4;
+      }
+    }
+  }
+  .field{
+    .label{
+      color: $palette4;
+    }
+  }
+  .loading-wrapper{
+    height: 35vw;
+    width: 35vw;
+    margin: auto;
+    .loading{
+      //animation: spinAround 700ms infinite ease-in-out;
+      border-left-color: $palette4;
+    }
+  }
+  .chapter-wrapper{
+    padding-top: 1.5rem;
+  }
+  .reader-footer{
+    padding-top: 3rem;
+    bottom: 0;
+    background-color: transparent;
+  }
+}
+
+@media screen and (max-width: 769px){
+  .reader-wrapper{
+    .loading-wrapper{
+      height: 65vw;
+      width: 65vw;
+    }
+  }
+}

@@ -9,7 +9,7 @@ if(!process.env.BROWSER)
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="app">
         {this.props.children}
       </div>
     );

@@ -8,39 +8,106 @@ import SVG from './SVG';
 import requestParser from './RequestParser';
 var rp = require('request-promise');
 
+if(process.env.BROWSER){
+  require('./Reader.scss');
+}
 
 class Reader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: []
+      loading: false,
+      chapter: [],
+      chaptertitle: "",
+      chapternum: 1,
+      pagenum: 1,
+      
     };
+    this.requestChapter = this.requestChapter.bind(this);
   }
   componentDidMount(){
+    this.requestChapter(5);
+  }
+  requestChapter(chapternum){
     const self = this;
-    var ch = 2;
-    rp(requestParser.uriMinusPath+'/chapter/'+ch, {method:'GET', json:true})
+    self.setState({loading: true});
+    rp(requestParser.uriMinusPath+'/chapter/'+chapternum, {method:'GET', json:true})
       .then(function(response){
-        var book = self.state.book;
-        book.push(response.pages);
-        self.setState(book);
+        console.log(response);
+        self.setState({
+          chapter: response.pages,
+          chaptertitle: response.name,
+          chapternum: chapternum,
+          loading: false
+        });
       })
   }
   render(){
-    console.log(this.state.book);
-    let book = this.state.book;
+    //let book = this.state.book;
+    let chapter = this.state.chapter;
+    let chaptertitle = this.state.chaptertitle;
+    let chapternum = this.state.chapternum;
+    let pagenum = this.state.pagenum;
     return(
       <div className="reader-wrapper">
         <Header size="small" color="palette1" textcolor="white" reader/>
-        <Hero color="palette1" title="One Piece" textcolor="white" centered = "centered">
-        {book.map(function(chapter, i){
-          return (
-            chapter.map(function(page, j){
-              return <img src={page.url}/>
-            })
-          )
-        })}
-        </Hero>
+        <div className="columns is-mobile">
+          <Column width="2">
+            <div className="left-button" onClick={()=>this.requestChapter(chapternum-1)}>
+              <SVG name="leftarrow"/>
+            </div>
+          </Column>
+          <Column width="6">
+            <div className = "field">
+              <label className="label">Manga Title</label>
+              <div className = "control"> 
+                <input className="input" type="text" placeholder="ex. one-piece (separate spaces with dashes)"/>
+              </div>
+            </div>
+          </Column>
+          <Column width="2">
+            <div className = "field">
+              <label className="label">Ch</label>
+              <div className = "control"> 
+                <input className="input" type="text" placeholder="1"/>
+              </div>
+            </div>
+          </Column>
+          <Column width="2">
+            <div className="right-button" onClick={()=>this.requestChapter(chapternum+1)}>
+              <SVG name="rightarrow"/>
+            </div>
+          </Column>
+        </div>   
+        <div className="chapter-wrapper">
+          <Hero color="palette1" title="One Piece" subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered = "centered">   
+              {!this.state.loading ? chapter.map(function(page, i){
+                return (
+                  <img className={`chapter-${chapternum} page-${page.pageId}`} src={page.url}/>
+                )
+                })
+                :
+                <div>
+                  <figure className="loading-wrapper">
+                    <div className="loading"/>
+                  </figure>
+                </div>
+              }
+            <div className="columns reader-footer is-mobile">
+              <Column width="2">
+                <div className="left-button" onClick={()=>this.requestChapter(chapternum-1)}>
+                  <SVG name="leftarrow"/>
+                </div>
+              </Column>
+              <Column width="8"/>
+              <Column width="2">
+                <div className="right-button" onClick={()=>this.requestChapter(chapternum+1)}>
+                  <SVG name="rightarrow"/>
+                </div>
+              </Column>
+            </div>
+          </Hero>
+        </div>
       </div>
     )
   }
