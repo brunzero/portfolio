@@ -85,8 +85,9 @@ class Reader extends React.Component {
         <div className="chapter-wrapper">
           <Hero color="palette1" title="One Piece" subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered = "centered">   
               {!this.state.loading ? chapter.map(function(page, i){
+                var url = page.url.replace(/^http:\/\//i, 'https://');
                 return (
-                  <img className={`chapter-${chapternum} page-${page.pageId}`} src={page.url}/>
+                  <img className={`chapter-${chapternum} page-${page.pageId}`} src={url}/>
                 )
                 })
                 :

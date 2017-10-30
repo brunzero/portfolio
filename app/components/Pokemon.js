@@ -25,19 +25,13 @@ class Pokemon extends React.Component{
       pokeID = Math.ceil(Math.random()*251);
     }
     else pokeID = name;
-    fetch('/pokemon/'+pokeID, {
-      method: 'GET',
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then(function (data) {
+    fetch('/pokemon/'+pokeID, {method: 'GET'})
+      .then((response) => {
+          return response.json()
+      })
+      .then(function (data) {
           self.setState({pokemon: data, loading: false});
-        }).catch(function(error){
-          console.log("JSON problems.");
-          console.log(error);
-        })
-      }
-      else console.log("Request for Pokemon failed.");
-    });
+      })
   }
 
   render(){
