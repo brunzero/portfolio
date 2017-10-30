@@ -7,7 +7,6 @@ import Pokemon from './Pokemon';
 import MusicRecognition from './MusicRecognition';
 import SVG from './SVG';
 import requestParser from './RequestParser';
-//var rp = require('request-promise');
 
 
 
@@ -20,11 +19,14 @@ if(process.env.BROWSER)
 
 
 class Home extends React.Component {
-  componentDidMount(){/*
-    rp(requestParser.uriMinusPath+'/weather', {method:'GET', json:true})
+  componentDidMount(){
+    fetch(requestParser.uriMinusPath+'/weather')
+      .then(function(response){
+        return response.json()
+      })
       .then(response=>{
         console.log(response);
-      })*/
+      })
   }
   render() {
     return (

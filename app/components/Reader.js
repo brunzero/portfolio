@@ -23,15 +23,18 @@ class Reader extends React.Component {
       pagenum: 1,
       
     };
-    //this.requestChapter = this.requestChapter.bind(this);
+    this.requestChapter = this.requestChapter.bind(this);
   }
   componentDidMount(){
-    //this.requestChapter(5);
+    this.requestChapter(5);
   }
-  /*requestChapter(chapternum){
+  requestChapter(chapternum){
     const self = this;
     self.setState({loading: true});
-    rp(requestParser.uriMinusPath+'/chapter/'+chapternum, {method:'GET', json:true})
+    fetch(requestParser.uriMinusPath+'/chapter/'+chapternum)
+      .then(function(response){
+        return response.json()
+      })
       .then(function(response){
         console.log(response);
         self.setState({
@@ -41,7 +44,7 @@ class Reader extends React.Component {
           loading: false
         });
       })
-  }*/
+  }
   render(){
     //let book = this.state.book;
     let chapter = this.state.chapter;
