@@ -29,7 +29,10 @@ class Reader extends React.Component {
   }
   requestChapter(title, chapternum){
     const self = this;
-    var title = title.replace(/ /, '-').toLowerCase();
+    var title = title.replace(/[ \t]+$/, '');
+    title = title.replace(/ /g, '-').toLowerCase();
+    title = title.replace(/[^\w-]/g,'');
+    console.log(title);
     self.setState({loading: true});
     fetch(requestParser.uriMinusPath+'/chapter/'+title+'/'+chapternum)
       .then(function(response){
@@ -38,7 +41,7 @@ class Reader extends React.Component {
       .then(function(response){
         if(JSON.stringify(response) !== '{}'){
           title = title.replace(/-/, ' ').toLowerCase();
-          title = title.toLowerCase().replace(/(^| )(\w)/g, s => s.toUpperCase())
+          title = title.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
           self.setState({
             title: title,
             chapter: response.pages,
