@@ -61,10 +61,20 @@
     .manga{
       width: 40%;
       margin-left: 5%;
+      input{
+        background-color: transparent;
+        border-color: $palette4;
+        color: $palette4;
+      }
     }
     .chapter{
       width: 45px;
       margin-left: 2.5%;
+      input{
+        background-color: transparent;
+        border-color: $palette4;
+        color: $palette4;
+      }
     }
     .label{
       //text-align: center;
