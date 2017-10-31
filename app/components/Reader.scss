@@ -20,6 +20,12 @@
   .hero{
     
   }
+  .text{
+    color: $palette4;
+    .notfound{
+      color: red;
+    }
+  }
   .right-button{
     position: fixed;
     right: 1%;
