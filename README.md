@@ -1,7 +1,7 @@
 # portfolio
-##### i tinker with stuff here
+#### i tinker with stuff here
 
-## working APIs:
+### working APIs:
 
 - pokemon: https://pokeapi.co/ 
 - music recognition: https://www.acrcloud.com/
