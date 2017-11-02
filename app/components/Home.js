@@ -20,13 +20,13 @@ if(process.env.BROWSER)
 
 class Home extends React.Component {
   componentDidMount(){
-    fetch(requestParser.uriMinusPath+'/weather')
+    /*fetch(requestParser.uriMinusPath+'/weather')
       .then(function(response){
         return response.json()
       })
       .then(response=>{
         console.log(response);
-      })
+      })*/
   }
   render() {
     return (
