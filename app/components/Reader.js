@@ -34,6 +34,7 @@ class Reader extends React.Component {
     var title = title.replace(/[ \t]+$/, '');
     title = title.replace(/ /g, '-').toLowerCase();
     title = title.replace(/[^\w-]/g,'');
+    self.setState({loading:true});
     fetch(requestParser.uriMinusPath+'/chapter/'+title+'/'+chapternum)
       .then(function(response){
         self.setState({loading:false})
