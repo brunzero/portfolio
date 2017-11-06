@@ -30,7 +30,12 @@ class Movies extends React.Component{
     this.setState({title:title});
     this.setState({season: season});
     this.setState({episode: episode});
-    fetch('/movies/'+title+"/"+season+"/"+episode);
+
+    title = this.refs.title.value;
+    season = this.refs.season.value!="" ? "/" + this.refs.season.value : "";
+    episode = this.refs.episode.value!="" ? "/" + this.refs.episode.value : "";
+
+    fetch('/movies/'+title+season+episode);
   }
   render(){
     let moviecode = this.state.moviecode || "";

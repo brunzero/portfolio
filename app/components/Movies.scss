@@ -61,3 +61,34 @@
     }
   }
 }
+
+
+@media screen and (max-width: 769px){
+  .movies-wrapper{
+    .form{
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      .movie{
+        width: 80%;
+        margin: unset;
+      }
+      .season{
+        width: 20%;
+        margin: unset;
+      }
+      .episode{
+        width: 20%;
+        margin: unset;
+        margin-bottom: 1.5rem;
+      }
+      .button{
+        margin: unset;
+      }
+    }
+    .embedded-video{
+      width: 85vw;
+      height: 85vw;
+    }
+  }
+}
