@@ -68,6 +68,15 @@ if (process.env.NODE_ENV == 'production') {
   });
 };
 
+if (process.env.NODE_ENV == 'production') {
+  app.get('/movies', function(req, res, next){
+    if (req.headers['x-forwarded-proto'] === 'https'){
+      res.redirect("http://"+req.headers.host + req.originalUrl);
+    }
+    next();
+  });
+};
+
 // Enable cross domain
 app.use( function( req, res, next ) {
 	res.header( 'Access-Control-Allow-Origin', '*' );
