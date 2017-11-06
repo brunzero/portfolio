@@ -151,7 +151,7 @@ app.get('/ip', weather.ip);
 app.get('/geolocate', weather.geolocate);
 app.get('/weather', weather.weather);
 app.get('/chapter/:title/:chapter', reader.chapter);
-app.get('/movies/:title', movies.movie);
+app.get('/movies/:title/:season?/:episode?', movies.movie);
 
 // React server rendering
 app.use(function(req, res) {

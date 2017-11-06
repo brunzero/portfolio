@@ -4,8 +4,8 @@
   background-color: $palette1;
   min-height: 100%;
   .embedded-video{
-    width: 64vw;
-    height: 36vw;
+    width: 80vw;
+    height: 50vw;
   } 
   .form{
     display: flex;
@@ -13,6 +13,28 @@
     align-items: flex-end;
     .movie{
       width: 40%;
+      margin-left: 5%;
+      text-align: center;
+      input{
+        background-color: transparent;
+        border-color: $palette4;
+        color: $palette4;
+        text-align: center;
+      }
+    }
+    .season{
+      width: 5%;
+      margin-left: 5%;
+      text-align: center;
+      input{
+        background-color: transparent;
+        border-color: $palette4;
+        color: $palette4;
+        text-align: center;
+      }
+    }
+    .episode{
+      width: 5%;
       margin-left: 5%;
       text-align: center;
       input{
