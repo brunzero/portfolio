@@ -30,8 +30,8 @@ class Movies extends React.Component{
       return response.text();
     })
     .then(function(response){
-      var responses = response.replace(/http/g, "https");
-      //console.log(responses); 
+      var responses = response.replace(/http:\/\//g, 'https://');
+      console.log(responses); 
       var vid = self.refs.video.contentWindow.document;
       vid.open();
       vid.write(response);
