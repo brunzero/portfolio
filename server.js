@@ -49,6 +49,13 @@ var compiler = webpack(config);
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
+// Enable cross domain
+app.use( function( req, res, next ) {
+	res.header( 'Access-Control-Allow-Origin', '*' );
+	res.header( 'Access-Control-Allow-Headers', 'X-Requested-With' );
+	next();
+});
+
 /*
 mongoose.createConnection(process.env.MONGODB);
 mongoose.connection.on('error', function() {
@@ -76,13 +83,6 @@ if (process.env.NODE_ENV == 'production') {
     next();
   });
 };
-
-// Enable cross domain
-app.use( function( req, res, next ) {
-	res.header( 'Access-Control-Allow-Origin', '*' );
-	res.header( 'Access-Control-Allow-Headers', 'X-Requested-With' );
-	next();
-});
 
 // Body parser with bigger body size limit
 var sizeLimit = process.env.SIZE_LIMIT || '5mb';
