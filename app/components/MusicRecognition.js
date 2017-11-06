@@ -58,6 +58,8 @@ class MusicRecognition extends React.Component{
   finishRecording(){
     const self = this;
     var recordRTC = this.state.recordRTC;
+    stream.stop();
+    stream = null;
     self.setState({record:false});
     recordRTC.stopRecording(function(audioURL) {
       var recordedBlob = recordRTC.getBlob();
@@ -88,12 +90,9 @@ class MusicRecognition extends React.Component{
     });
   }
   toggleRecording(){
-    if(this.state.recordingSupported)
-    {
-      if(this.state.record)
-        this.finishRecording();
-      else this.beginRecording();
-    }
+    if(this.state.record)
+      this.finishRecording();
+    else this.beginRecording();
   }
   renderSongResult(){
     if(this.state.loading)
@@ -112,7 +111,7 @@ class MusicRecognition extends React.Component{
       <div className={`music-recognition-wrapper text-${textcolor}`}>
         <div className="columns">
           <Column>
-            Record part of the song and I'll tell you what it is. <br/> Recording on mobile is not supported. 
+            Record part of the song and I'll tell you what it is. <br/> Recording on some devices is not supported. 
           </Column>
         </div>
         <div className="columns">
