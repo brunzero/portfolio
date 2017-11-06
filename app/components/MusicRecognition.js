@@ -13,7 +13,6 @@ class MusicRecognition extends React.Component{
     constructor(props) {
     super(props);
     this.state = {
-      recordingSupported: false,
       loading: true,
       record: false,
       blob: "",
@@ -27,11 +26,6 @@ class MusicRecognition extends React.Component{
   }
 
   componentDidMount(){
-    const self = this;
-    navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(streamCaptured){ 
-      //stream = streamCaptured;
-      self.setState({recordingSupported: true});
-    }).catch();
   }
 
   beginRecording(){
@@ -114,12 +108,11 @@ class MusicRecognition extends React.Component{
     let record = this.state.record;
     let metadata = this.state.metadata;
     let recording = this.state.record ? "recording" : ""
-    let supported = this.state.recordingSupported ? "supported":"not supported";
     return(
       <div className={`music-recognition-wrapper text-${textcolor}`}>
         <div className="columns">
           <Column>
-            Record part of the song and I'll tell you what it is. <br/> Recording on your device is {supported}. 
+            Record part of the song and I'll tell you what it is. <br/> Recording on mobile is not supported. 
           </Column>
         </div>
         <div className="columns">
