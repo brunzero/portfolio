@@ -24,18 +24,20 @@ class Movies extends React.Component{
     e.preventDefault();
     var title = this.refs.title.value;
     this.setState({title:title});
-    /*
+    
     fetch('/movies/'+title)
     .then(function(response){
       return response.text();
     })
     .then(function(response){
-      var response = (response);
-      console.log(response);
-      response = response.split("#hostname")[1].split("href='")[1].split("' target")[0];
-      console.log(response);
+      var responses = response.replace(/http/g, "https");
+      console.log(responses); 
+      var vid = self.refs.video.contentWindow.document;
+      vid.open();
+      vid.write(response);
+      vid.close();
       self.setState({moviecode: response});
-    })*/
+    })
   }
   render(){
     let moviecode = this.state.moviecode || "";
@@ -53,7 +55,7 @@ class Movies extends React.Component{
           <input className="button" type="submit"/>
         </form>
         <Hero centered color="palette1">
-          {title!="" && <iframe className="embedded-video" src={"https://vodlocker.to/embed?t="+title} allowFullScreen="true" scrolling="no"/>}
+          {title!="" && <iframe ref="video" className="embedded-video" allowFullScreen="true" scrolling="no"/>}
         </Hero>
       </div>
     )
