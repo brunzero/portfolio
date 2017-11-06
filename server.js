@@ -64,10 +64,14 @@ if (process.env.NODE_ENV == 'production') {
     if(req.params[0]=='/movies'){
       if(req.headers['x-forwarded-proto'] !== 'http')
         res.redirect("http://"+req.headers.host + req.originalUrl);
+        console.log("originalurl " + req.originalUrl);
+        console.log("url "+ req.url);
     }
     else{
       if (req.headers['x-forwarded-proto'] !== 'https')
         res.redirect("https://"+req.headers.host + req.originalUrl);
+        console.log("originalurl " + req.originalUrl);
+        console.log("url "+ req.url);
     }
     next();
   });
