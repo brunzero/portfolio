@@ -49,13 +49,6 @@ var compiler = webpack(config);
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
-// Enable cross domain
-app.use( function( req, res, next ) {
-	res.header( 'Access-Control-Allow-Origin', '*' );
-	res.header( 'Access-Control-Allow-Headers', 'X-Requested-With' );
-	next();
-});
-
 /*
 mongoose.createConnection(process.env.MONGODB);
 mongoose.connection.on('error', function() {
@@ -68,21 +61,25 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 if (process.env.NODE_ENV == 'production') {
   app.get('*', function(req, res, next){
-    if (req.headers['x-forwarded-proto'] !== 'https'){
-      res.redirect("https://"+req.headers.host + req.originalUrl);
+    if(req.params[0]=='/movies'){
+      if(req.headers['x-forwarded-proto'] !== 'http')
+        res.redirect("http://"+req.headers.host + req.originalUrl);
+    }
+    else{
+      if (req.headers['x-forwarded-proto'] !== 'https')
+        res.redirect("https://"+req.headers.host + req.originalUrl);
     }
     next();
   });
 };
 
-if (process.env.NODE_ENV == 'production') {
-  app.get('/movies', function(req, res, next){
-    if (req.headers['x-forwarded-proto'] === 'https'){
-      res.redirect("http://"+req.headers.host + req.originalUrl);
-    }
-    next();
-  });
-};
+
+// Enable cross domain
+app.use( function( req, res, next ) {
+	res.header( 'Access-Control-Allow-Origin', '*' );
+	res.header( 'Access-Control-Allow-Headers', 'X-Requested-With' );
+	next();
+});
 
 // Body parser with bigger body size limit
 var sizeLimit = process.env.SIZE_LIMIT || '5mb';
