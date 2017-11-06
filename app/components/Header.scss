@@ -1,6 +1,66 @@
+@import './Colors.scss';
+
 .header-wrapper{
   .hero-body{
     padding-top: 9rem;
     padding-bottom: 9rem;
+  }
+  .navbar-left{
+    position: absolute;
+    display: flex;
+    left: -15rem;
+    transition: left .8s ease-out;
+  }
+  .navbar-left.slide{
+    left: 0;
+  }
+  .navbar-menu{
+    .navbar-item{
+      color:white;
+      &:hover{
+        background-color: $palette2;
+      }
+    }
+  }
+  .navbar-menu.is-active{
+    background-color: $palette2;
+    display: inline-block;
+    right: 0;
+    //margin-right: .25rem;
+    position: absolute;
+    padding-top: unset;
+    padding-bottom: unset;
+    z-index: 2;
+    overflow: hidden;
+    box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.40);
+    .navbar-end{
+      width: 100%;
+    }
+    .navbar-item{
+      width: 100%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      color: white;
+      &:hover{
+        background-color: $palette2;
+      }
+    }
+  }
+  .navbar-burger{
+    color: white;
+    //margin-right: .25rem;
+    z-index: 3;
+    &:hover{
+      background-color: $palette2;
+    }
+  }
+  .navbar-burger.is-active{
+    background-color: $palette2;
+    box-shadow: 0px -20px 30px 0px rgba(0,0,0,0.4);
+    &:hover{
+      background-color: $palette1;
+    }
   }
 }
