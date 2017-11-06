@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Hero from './Hero';
 import Column from './Column';
 import { browserHistory } from 'react-router';
+import requestParser from './RequestParser';
+
 
 if(process.env.BROWSER){
   require('./Header.scss');
@@ -60,7 +62,7 @@ class Header extends React.Component {
                   <a className="navbar-item" onClick={()=>this.routeTo('/home')}>
                     home
                   </a>
-                  <a className="navbar-item" onClick={()=>this.routeTo('/movies')}>
+                  <a className="navbar-item" href={requestParser.uriMinusPath+'/movies'}>
                     movies
                   </a>
                   <a className="navbar-item" onClick={()=>this.routeTo('/reader')}>
