@@ -31,9 +31,9 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-wrapper">
-        <Header size="medium" color="palette1" title="Welcome" textcolor="white" home/>
+        <Header size="medium" color="palette1" title="Welcome" textcolor="white" headertitle="Bruno's Workshop"/>
         <div className="pokemon-home-wrapper">
-          <Hero title = "Have some Pokèmon" subtitle="Refresh the page if you don't like your team" centered="centered">
+          <Hero title = "Have some Pokèmon" subtitle="Refresh the page if you don't like your team" centered>
               <div className="columns">
                 <Column color="palette2">
                   <Pokemon textcolor="black"/>
@@ -48,12 +48,12 @@ class Home extends React.Component {
           </Hero>
         </div>
         <div className="music-recognition-home-wrapper">
-        <Hero textcolor="white" color="palette1" title="Are you listening to music?" centered="centered">
+        <Hero textcolor="white" color="palette1" title="Are you listening to music?" centered>
           <MusicRecognition textcolor="white"/>
         </Hero>
         </div>
         <div className="weather-home-wrapper">
-        <Hero size="medium" title="How's the weather?" subtitle="Coming Soon" centered = "centered">
+        <Hero size="medium" title="How's the weather?" subtitle="Coming Soon" centered>
         </Hero>
         </div>
       </div>

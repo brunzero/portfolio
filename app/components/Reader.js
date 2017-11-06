@@ -106,7 +106,7 @@ class Reader extends React.Component {
     let pagenum = this.state.pagenum || 1;
     return(
       <div className="reader-wrapper">
-        <Header size="small" color="palette1" textcolor="white" reader/>
+        <Header size="small" color="palette1" textcolor="white" headertitle="Manga Reader"/>
         <form className = "form field" onSubmit={(e)=>{this.submitForm(e)}}>
           <div className = "manga">
             <label className="label">Manga Title</label>
@@ -123,7 +123,7 @@ class Reader extends React.Component {
           <input className="button" type="submit"/>
         </form>
         <div className="chapter-wrapper">
-          <Hero color="palette1" title={title} subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered = "centered"> 
+          <Hero color="palette1" title={title} subtitle={"Chapter " + chapternum + ": " + chaptertitle} textcolor="palette4" subtextcolor="white" centered> 
             {this.renderChapter()}   
           </Hero>
           <div className="left-button" onClick={()=>this.requestChapter(title, (chapternum-1))}>

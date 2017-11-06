@@ -9,7 +9,7 @@ class Hero extends React.Component{
     let size = this.props.size || "";
     let color = this.props.color || "";
     let textcolor = this.props.textcolor || "";
-    let centered = this.props.centered || "";
+    let centered = this.props.centered ? "centered" : "";
     let subtextcolor = this.props.subtextcolor || "";
     return(
       <div className={`hero is-${size} ${color} has-text-${centered}`}>
