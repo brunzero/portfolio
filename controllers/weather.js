@@ -17,7 +17,7 @@ exports.geolocate = function(req, res){
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress;
   if(ip){
-    var list = ip.split(',');
+    var list = ip.split(',')[0];
     console.log(list);
   }
   console.log(req.headers['x-forwarded-for']);
