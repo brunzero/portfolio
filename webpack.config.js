@@ -148,14 +148,14 @@ else if(process.env.NODE_ENV === 'production'){
         {
           test: /\.css/,
           use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
+            fallbackLoader: 'style-loader',
             use: 'css-loader'
           })
         },
         {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
+            fallbackLoader: 'style-loader',
             loaders: [
               'css-loader',
               'sass-loader'
