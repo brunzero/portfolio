@@ -8,7 +8,6 @@ process.noDeprecation = true
 
 if(process.env.NODE_ENV === 'development')
 {
-  console.log('WE USING DEV WEBPACK SHIT');
   var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
@@ -119,10 +118,6 @@ else if(process.env.NODE_ENV === 'production'){
     ],
     module: {
       loaders: [
-        {
-          test: /\.json$/,
-          loader: 'json-loader'
-        },
         {
           test: /\.js$/,
           exclude: /node_modules/,
