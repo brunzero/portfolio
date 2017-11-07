@@ -2,8 +2,8 @@ var ACRCloud = require('acr-cloud');
 
 var acr = new ACRCloud({
     // required 
-    access_key: "73d6f63fb7f29a0162415ab06fc6be1f",
-    access_secret: "HYyaskkUCHM6z2sVdc9d99hJHX5yWzBxNs3DcPpP",
+    access_key: process.env.ACRCLOUD_KEY,
+    access_secret: process.env.ACRCLOUD_SECRET,
     // optional 
     requrl: 'identify-us-west-2.acrcloud.com',
     http_method: 'POST',

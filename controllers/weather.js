@@ -23,7 +23,7 @@ exports.weather = function(req, res){
   rp('http://ip-api.com/json/'+ip, {json: true})
     .then(response => {
       console.log("Region: " + response.region + " City: " + response.city);
-      return rp('http://api.wunderground.com/api/e2b6ca0c3ea2e2b7/conditions/q/'+response.region+'/'+response.city+'.json', {json: true});  
+      return rp('http://api.wunderground.com/api/'+process.env.WUNDERGROUND_KEY+'/conditions/q/'+response.region+'/'+response.city+'.json', {json: true});  
     })
     .then(response => {
       var weather = response.current_observation;
