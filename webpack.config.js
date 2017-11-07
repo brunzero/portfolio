@@ -118,7 +118,9 @@ else if(process.env.NODE_ENV === 'production'){
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'process.env.BROWSER': JSON.stringify(true)
-      })
+      }),
+      ExtractCSS,
+      ExtractSASS
     ],
     module: {
       loaders: [
@@ -156,14 +158,7 @@ else if(process.env.NODE_ENV === 'production'){
             fallback: 'style-loader',
             loaders: [
               'css-loader',
-              'sass-loader',
-            /*{
-              loader: 'sass-resources-loader',
-              options: {
-                // Sass files here are global resources
-                resources: ['./app/components/Colors.scss'],
-              },
-            },*/
+              'sass-loader'
             ]
           })
         }
