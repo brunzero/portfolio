@@ -22,7 +22,8 @@ var favicon = require('serve-favicon')
 
 
 // Load environment variables from .env file
-dotenv.load();
+if(process.env.NODE_ENV=='development')
+  dotenv.load();
 
 // ES6 Transpiler
 require('babel-core/register');
