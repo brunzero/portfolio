@@ -27,7 +27,7 @@ class Weather extends React.Component{
   }
   render(){
     let weather = this.state.weather;
-    console.log(weather);
+   // console.log(weather);
     return(
       <div className="weather-wrapper">
         <Hero size="small" title="How's the weather?" centered>

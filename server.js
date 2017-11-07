@@ -73,12 +73,6 @@ if (process.env.NODE_ENV == 'production') {
   });
 };
 
-app.get('*', function(req, res, next){
-  console.log(req.params[0]);
-  next();
-})
-
-
 // Enable cross domain
 app.use( function( req, res, next ) {
 	res.header( 'Access-Control-Allow-Origin', '*' );
