@@ -11,6 +11,9 @@ class App extends React.Component {
     return (
       <div className="app">
         {this.props.children}
+        <div className="music-player">
+          <iframe src="https://open.spotify.com/embed?uri=spotify:user:12129645831:playlist:0hhpEDlyBgujrGy7T0c4uK" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>        
+        </div>
       </div>
     );
   }
