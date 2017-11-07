@@ -75,7 +75,6 @@
     "chai": "^3.5.0",
     "enzyme": "^2.3.0",
     "fetch-mock": "3.0.2",
-    "json-loader": "^0.5.7",
     "mocha": "^2.4.5",
     "node-sass": "^4.5.3",
     "react-addons-test-utils": "^15.0.2",
