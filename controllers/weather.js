@@ -16,6 +16,10 @@ exports.geolocate = function(req, res){
      req.connection.remoteAddress || 
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress;
+  if(ip){
+    var list = ip.split(',');
+    console.log(list);
+  }
   console.log(req.headers['x-forwarded-for']);
   if(process.env.NODE_ENV=='development')
     ip = '71.47.170.82';
