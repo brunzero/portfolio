@@ -87,9 +87,23 @@ if(process.env.NODE_ENV === 'development')
   };
 }
 else if(process.env.NODE_ENV === 'production'){
-  console.log('WE NOT USING DEV WEBPACK SHIT');
+  var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+  const ExtractCSS = new ExtractTextPlugin({
+    filename: (getPath) => {
+      return getPath('css/[name]-css.css').replace('css/js', 'css');
+    },
+    allChunks: true
+  })
+  const ExtractSASS = new ExtractTextPlugin({
+    filename: (getPath) => {
+      return getPath('css/[name]-sass.css').replace('css/js', 'css');
+    },
+    allChunks: true
+  })
+
   var config = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     entry: [
       './app/main'
     ],
@@ -131,17 +145,18 @@ else if(process.env.NODE_ENV === 'production'){
         },
         {
           test: /\.css/,
-          loaders: [
-            'style-loader',
-            'css-loader'
-          ],
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: 'css-loader'
+          })
         },
         {
           test: /\.scss$/,
-          loaders: [
-            'style-loader',
-            'css-loader',
-            'sass-loader',
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            loaders: [
+              'css-loader',
+              'sass-loader',
             /*{
               loader: 'sass-resources-loader',
               options: {
@@ -149,8 +164,9 @@ else if(process.env.NODE_ENV === 'production'){
                 resources: ['./app/components/Colors.scss'],
               },
             },*/
-          ],
-        },
+            ]
+          })
+        }
       ]
     }
   };

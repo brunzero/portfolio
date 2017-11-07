@@ -31,6 +31,7 @@
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "express-validator": "^2.20.4",
+    "extract-text-webpack-plugin": "^3.0.2",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^5.7.0",
     "lamejs": "^1.2.0",
