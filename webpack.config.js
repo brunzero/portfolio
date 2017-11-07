@@ -1,7 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
 var dotenv = require('dotenv');
+
 dotenv.load();
+
+process.noDeprecation = true
 
 if(process.env.NODE_ENV === 'development')
 {
@@ -23,8 +26,7 @@ if(process.env.NODE_ENV === 'development')
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.NoErrorsPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
       new webpack.IgnorePlugin(/\/iconv-loader$/),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -32,12 +34,6 @@ if(process.env.NODE_ENV === 'development')
       })
     ],
     module: {
-      preLoaders : [
-        { 
-          test: /\.json$/, 
-          loader: 'json'
-        }
-      ],
       loaders: [
         {
           test: /\.js$/,
@@ -114,7 +110,6 @@ else if(process.env.NODE_ENV === 'production'){
     },
     plugins: [
       new webpack.NoErrorsPlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'process.env.BROWSER': JSON.stringify(true)
@@ -148,14 +143,14 @@ else if(process.env.NODE_ENV === 'production'){
         {
           test: /\.css/,
           use: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
+            fallback: 'style-loader',
             use: 'css-loader'
           })
         },
         {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
+            fallback: 'style-loader',
             loaders: [
               'css-loader',
               'sass-loader'
