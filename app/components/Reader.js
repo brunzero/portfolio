@@ -44,6 +44,7 @@ class Reader extends React.Component {
         if(JSON.stringify(response) !== '{}'){
           title = title.replace(/-/, ' ').toLowerCase();
           title = title.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+          document.documentElement.scrollTop = 200;
           self.setState({
             title: title,
             chapter: response.pages,
