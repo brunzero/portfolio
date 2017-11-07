@@ -156,7 +156,7 @@ else if(process.env.NODE_ENV === 'production'){
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            loaders: [
+            use: [
               'css-loader',
               'sass-loader'
             ]
