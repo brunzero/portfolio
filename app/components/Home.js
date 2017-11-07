@@ -20,7 +20,7 @@ class Home extends React.Component {
       <div className="home-wrapper">
         <Header size="medium" color="palette1" title="Welcome" textcolor="white" headertitle="Bruno's Workshop"/>
         <div className="pokemon-home-wrapper">
-          <Hero title = "Have some Pokèmon" subtitle="Refresh the page if you don't like your team" centered>
+          <Hero title = "Have some Pokèmon" subtitle="See if you can find your favorites!" centered>
               <div className="columns">
                 <Column color="palette2">
                   <Pokemon textcolor="black"/>

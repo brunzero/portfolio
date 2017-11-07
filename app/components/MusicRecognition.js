@@ -99,7 +99,7 @@ class MusicRecognition extends React.Component{
       return(<span>Your song goes here</span>)
     else if(this.state.metadata=="")
       return(<span>I wasn't able to identify your song. <br/> Try recording again.</span>)
-    else return <span>{this.state.metadata.artists[0].name} - {this.state.metadata.title}</span>
+    else return <span>{this.state.metadata.title} - {this.state.metadata.artists[0].name}</span>
   }
 
   render(){

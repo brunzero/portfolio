@@ -23,7 +23,7 @@ class Pokemon extends React.Component{
     const self = this;
     var pokeID;
     if(!name){
-      pokeID = Math.ceil(Math.random()*251);
+      pokeID = Math.ceil(Math.random()*800);
     }
     else pokeID = name;
     self.setState({loading:true})
