@@ -3,6 +3,7 @@ var rp = require('request-promise');
 
 
 exports.chapter = function(req, res){
+  console.log(process.env.MANGA_KEY);
   var siteid = 'mangareader.net';
   var mangaid = req.params.title;
   var chapterid = req.params.chapter;
