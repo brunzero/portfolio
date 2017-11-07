@@ -16,8 +16,10 @@ exports.geolocate = function(req, res){
      req.connection.remoteAddress || 
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress;
+  if(process.env.NODE_ENV=='development')
+    ip = '71.47.170.82';
 
-  rp('http://ip-api.com/json/71.47.170.82', {json: true})
+  rp('http://ip-api.com/json/'+ip, {json: true})
     .then(response => {
       return res.send(response);
     })
@@ -31,7 +33,8 @@ exports.weather = function(req, res){
       return rp('http://api.wunderground.com/api/e2b6ca0c3ea2e2b7/conditions/q/'+response.region+'/'+response.city+'.json', {json: true});
     })
     .then(response => {
-      return res.send({response});
+      var weather = response.current_observation;
+      return res.send({weather});
     })
   /*fetch('http://api.wunderground.com/api/72ee86d736ffd975/conditions/q/FL/Orlando.json' {
     method: 'GET',

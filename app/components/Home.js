@@ -4,30 +4,17 @@ import Hero from './Hero';
 import Column from './Column';
 import Header from './Header';
 import Pokemon from './Pokemon';
+import Weather from './Weather';
 import MusicRecognition from './MusicRecognition';
 import SVG from './SVG';
 import requestParser from './RequestParser';
-
-
-
 
 if(process.env.BROWSER)
 {
   require('./Home.scss');
 }
 
-
-
 class Home extends React.Component {
-  componentDidMount(){
-    /*fetch(requestParser.uriMinusPath+'/weather')
-      .then(function(response){
-        return response.json()
-      })
-      .then(response=>{
-        console.log(response);
-      })*/
-  }
   render() {
     return (
       <div className="home-wrapper">
@@ -53,8 +40,7 @@ class Home extends React.Component {
         </Hero>
         </div>
         <div className="weather-home-wrapper">
-        <Hero size="medium" title="How's the weather?" subtitle="Coming Soon" centered>
-        </Hero>
+          <Weather/>
         </div>
       </div>
     );

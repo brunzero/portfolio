@@ -22,12 +22,19 @@ class Header extends React.Component {
     setTimeout(()=>{this.setState({slide: true})}, 50);
   }
   routeTo(route){
+    if(requestParser.protocol == "http://" && process.env.NODE_ENV=='production')
+      window.location.href = "https://" + requestParser.domain + route;
     browserHistory.push(route);
   }
   toggleActive(){
     if(this.state.active)
       this.setState({active:false});
     else this.setState({active:true});
+  }
+  determineSketchyRoute(route){
+    if(process.env.BROWSER)
+      return requestParser.uriMinusPath + route;
+    else return route;
   }
   render(){
     let title = this.props.title || "";
@@ -62,7 +69,7 @@ class Header extends React.Component {
                   <a className="navbar-item" onClick={()=>this.routeTo('/home')}>
                     home
                   </a>
-                  <a className="navbar-item" href={requestParser.uriMinusPath+'/movies'}>
+                  <a className="navbar-item" href={this.determineSketchyRoute('/movies')}>
                     movies
                   </a>
                   <a className="navbar-item" onClick={()=>this.routeTo('/reader')}>

@@ -4,8 +4,12 @@ if(process.env.BROWSER){
   var requestParser = (function() {
     var href = document.location.href;
     var urlObj = url.parse(href, true);
+    var protocol = urlObj.protocol + "//";
+    var domain = urlObj.hostname;
 
     return { 
+      domain,
+      protocol,
       href,
       urlObj,
       getQueryStringValue: (key) => {
