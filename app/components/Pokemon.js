@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Column from './Column';
+import SVG from './SVG';
 
 if(process.env.BROWSER){
   require('./Pokemon.scss');
@@ -25,6 +26,7 @@ class Pokemon extends React.Component{
       pokeID = Math.ceil(Math.random()*251);
     }
     else pokeID = name;
+    self.setState({loading:true})
     fetch('/pokemon/'+pokeID, {method: 'GET'})
       .then((response) => {
           return response.json()
@@ -54,6 +56,9 @@ class Pokemon extends React.Component{
         <figure className="image is-96x96">
           <img src={pokeSprite} height="96" width="96"/>
         </figure>
+        <div className="reload-button" onClick={()=>this.fetchPokemon()}>
+          <SVG name="reload"/>
+        </div>
         <span><b>{pokeName}</b></span>
         <span><b>Height:</b>  {pokeHeight} <b>m</b></span>
         <span><b>Weight:</b>  {pokeWeight} <b>kg</b></span>
