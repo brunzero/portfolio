@@ -1,0 +1,136 @@
+@import './Colors.scss';
+
+.reader-wrapper{
+  min-height: 100vh;
+  background-color: $palette1;
+  .columns{
+    margin: unset;
+    min-height: 36px;
+    .column{
+      margin: unset;
+      padding-left: .5rem;
+      padding-right: .5rem;
+      .column-child{
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+    }
+  }
+  .hero{
+    
+  }
+  .text{
+    color: $palette4;
+    .notfound{
+      color: red;
+    }
+  }
+  .right-button{
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+    height: 64px;
+    width: 64px;
+    border-radius: 1000000px;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.7);  
+    z-index: 3;
+    .rightarrow{
+      cursor: pointer;
+      height: 100%;
+      width: 100%;
+      .line{
+        fill: $palette4;
+      }
+    }
+  }
+  .left-button{
+    position: fixed;
+    left: 1%;
+    bottom: 1%;
+    height: 64px;
+    width: 64px;
+    border-radius: 1000000px;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.7);
+    z-index: 3;  
+    .leftarrow{
+      cursor: pointer;
+      height: 100%;
+      width: 100%;
+      .line{
+        fill: $palette4;
+      }
+    }
+  }
+  .form{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .manga{
+      width: 40%;
+      margin-left: 5%;
+      text-align: center;
+      input{
+        background-color: transparent;
+        border-color: $palette4;
+        color: $palette4;
+        text-align: center;
+      }
+    }
+    .chapter{
+      width: 60px;
+      margin-left: 2.5%;
+      text-align: center;
+      input{
+        background-color: transparent;
+        border-color: $palette4;
+        color: $palette4;
+        text-align: center;
+      }
+    }
+    .label{
+      //text-align: center;
+      color: $palette4;
+    }
+    .button{
+      margin-left: 2.5%;
+      margin-right: 5%;
+      border-color: $palette4;
+      color: $palette4;
+      background-color: transparent;
+    }
+    .button:hover{
+      background-color: $palette4;
+      color: white;
+    }
+  }
+  .loading-wrapper{
+    height: 35vw;
+    width: 35vw;
+    margin: auto;
+    .loading{
+      //animation: spinAround 700ms infinite ease-in-out;
+      border-left-color: $palette4;
+    }
+  }
+  .chapter-wrapper{
+    padding-top: 1.5rem;
+    img{
+      padding-bottom: 1.5rem
+    }
+  }
+  .reader-footer{
+    padding-top: 3rem;
+    bottom: 0;
+    background-color: transparent;
+  }
+}
+
+@media screen and (max-width: 769px){
+  .reader-wrapper{
+    .loading-wrapper{
+      height: 65vw;
+      width: 65vw;
+    }
+  }
+}

@@ -33,7 +33,12 @@ require('babel-polyfill');
 var User = require('./models/User');  
 
 // Controllers
-
+var music = require('./controllers/music')
+var pokemon = require('./controllers/pokemon');
+var user = require('./controllers/user');
+var weather = require('./controllers/weather');
+var reader = require('./controllers/reader');
+var movies = require('./controllers/movies');
 
 // React and Server-Side Rendering
 var routes = require('./app/routes');
@@ -140,7 +145,12 @@ if (process.env.NODE_ENV === 'development') {
 
 
 // Place endpoints here
-
+app.post('/identify', music.identify);
+app.get('/pokemon/:id', pokemon.pokemon);
+app.get('/ip', weather.ip);
+app.get('/weather', weather.weather);
+app.get('/chapter/:title/:chapter', reader.chapter);
+app.get('/movies/:title/:season?/:episode?', movies.movie);
 
 // React server rendering
 app.use(function(req, res) {
